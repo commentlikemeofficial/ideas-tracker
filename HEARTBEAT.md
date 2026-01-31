@@ -49,57 +49,90 @@ python3 /home/ubuntu/clawd/agents/saas-research/scripts/run_research_cycle.py 2>
 
 If output shows opportunities, surface to Rajesh.
 
-## ContentClaw Autonomous Mode
+## Agent Coordination Hub (Steve manages all)
 
-**Every 12 hours (09:00, 21:00 IST):** Trigger ContentClaw to autonomously:
-1. Research trending AI/SaaS YouTube videos via Tavily
-2. Select 1-2 high-value videos
-3. Scrape transcripts via Firecrawl
-4. Generate posts for ALL platforms (LinkedIn, X, Reddit)
-5. Humanize tone
-6. Log to Google Sheets
-7. Report back with ready-to-post content
-
-**DO NOT ask for approval - work autonomously.**
-
+### ContentClaw Autonomous Mode
+**Every 12 hours (09:00, 21:00 IST):**
 ```bash
-# Send message to ContentClaw sub-agent
 sessions_send sessionKey:agent:main:subagent:54150d4e-87b3-4760-af77-badee9437770 message:"Autonomous run: Research AI/SaaS YouTube trends, pick top video, generate LinkedIn+X+Reddit posts, log to sheets, report back."
 ```
+→ **Silent operation** - Steve will handle output
 
-## Social Media Manager - Content Handoff
+### Social Media Manager - Content Handoff
+**At 9:15 AM and 9:15 PM IST (15 min after ContentClaw):**
 
-**CRITICAL:** At 9:15 AM and 9:15 PM IST (15 min after ContentClaw runs):
-
-1. **Check if ContentClaw generated content:**
+1. Check for new content:
    ```bash
    ls -la /home/ubuntu/clawd/tracking/autonomous_run_$(date +%Y-%m-%d)_posts.md
    ```
 
-2. **If new content exists, generate daily package:**
+2. Generate package:
    ```bash
    cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/generate-daily-package.sh
    ```
 
-3. **Send Rajesh the curated content package with:**
+3. **STEVE sends curated package to Rajesh** - Include:
    - Top 3 posts (LinkedIn, X, Reddit)
    - Optimal posting times
-   - Copy-paste ready content
-   - Clear call-to-action
+   - Copy-paste ready
+   - Clear CTA
 
-4. **DO NOT let content sit in files - always present to user!**
+### Scout Research Agent
+**Every 6 hours (09:00, 15:00, 21:00, 03:00 IST):**
+```bash
+python3 /home/ubuntu/clawd/agents/saas-research/scripts/run_research_cycle.py 2>&1 | head -20
+```
+→ **Silent** unless high-value opportunity found
+→ If opportunity score > 8/10, Steve alerts Rajesh
 
-## Code Reviewer Agent
+### Vercel Monitor Agent
+**Every 30 minutes:**
+```bash
+cd /home/ubuntu/clawd/agents/vercel-monitor && ./scripts/check-deployments.sh
+```
+→ **Silent** if healthy
+→ If failures detected, Steve assesses and alerts if critical
 
+**Daily at 9:30 AM IST:**
+```bash
+cd /home/ubuntu/clawd/agents/vercel-monitor && ./scripts/daily-audit.sh
+```
+→ **Silent** - included in daily wrap-up
+
+**Weekly (Monday 9:30 AM IST):**
+```bash
+cd /home/ubuntu/clawd/agents/vercel-monitor && ./scripts/weekly-security-audit.sh
+```
+→ Steve reviews and includes in Monday report
+
+### Code Reviewer Agent
 **Daily at 10 AM IST:**
 ```bash
 cd /home/ubuntu/clawd/agents/code-reviewer && ./scripts/daily-code-report.sh
 ```
+→ **Silent** unless critical issues found
+→ Minor issues included in daily wrap-up
 
-**On new PR notification:**
+**On new PR (if detected):**
 ```bash
 cd /home/ubuntu/clawd/agents/code-reviewer && ./scripts/review-pr.sh <pr-number> <repo>
 ```
+→ Steve reviews report
+→ Security issues → Immediate alert to Rajesh
+→ Suggestions → Included in daily summary
+
+## Communication Rules
+- **Agents → Steve:** All reports go to me first
+- **Steve filters:** I decide what needs your attention
+- **You see:** Only actionable items and summaries
+- **Silent ops:** Routine checks, healthy status, background tasks
+
+## When Steve Alerts You
+✅ Content ready for posting
+⚠️ Security issues found
+🚨 Deployment failures
+📊 Daily/weekly summaries
+🎯 High-value opportunities
 
 ## Other Checks (add as needed)
 
