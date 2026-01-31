@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { ArrowUpDown, Search } from 'lucide-react';
+import { ArrowUpDown, Search, Sparkles, Target, TrendingUp } from 'lucide-react';
 
 type SortKey = 'title' | 'score' | 'status' | 'createdAt';
 type SortOrder = 'asc' | 'desc';
@@ -88,25 +88,32 @@ export function IdeasTable({ ideas, onIdeaClick }: IdeasTableProps) {
     return counts;
   }, [ideas]);
 
+  const getScoreBadge = (score: number) => {
+    if (score >= 32) return { icon: Sparkles, color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' };
+    if (score >= 24) return { icon: TrendingUp, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' };
+    if (score >= 16) return { icon: Target, color: 'text-orange-400', bg: 'bg-orange-500/10', border: 'border-orange-500/20' };
+    return { icon: Target, color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20' };
+  };
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <div className="relative flex-1 group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <Input
-            placeholder="Search ideas..."
+            placeholder="Search ideas by title, description, or market..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
+            className="pl-11 h-12 glass-card border-transparent focus:border-primary/50 transition-all"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as Idea['status'] | 'all')}
-          className="rounded-md border border-input bg-transparent px-3 py-2 text-sm"
+          className="h-12 rounded-xl border border-border/50 bg-card/50 backdrop-blur px-4 text-sm focus:border-primary/50 focus:outline-none transition-all cursor-pointer hover:bg-card"
         >
-          <option value="all">All Status ({statusCounts.all || 0})</option>
+          <option value="all">🌟 All Ideas ({statusCounts.all || 0})</option>
           <option value="Researching">🔍 Researching ({statusCounts.Researching || 0})</option>
           <option value="Validating">✅ Validating ({statusCounts.Validating || 0})</option>
           <option value="Building">🚀 Building ({statusCounts.Building || 0})</option>
@@ -116,33 +123,33 @@ export function IdeasTable({ ideas, onIdeaClick }: IdeasTableProps) {
       </div>
 
       {/* Table */}
-      <div className="border rounded-lg">
+      <div className="glass-card rounded-xl overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead className="cursor-pointer" onClick={() => handleSort('title')}>
-                <div className="flex items-center gap-1">
-                  Title
-                  <ArrowUpDown className="h-3 w-3" />
+            <TableRow className="border-border/50 hover:bg-transparent">
+              <TableHead className="cursor-pointer hover:text-primary transition-colors" onClick={() => handleSort('title')}>
+                <div className="flex items-center gap-2">
+                  Idea
+                  <ArrowUpDown className="h-3 w-3 opacity-50" />
                 </div>
               </TableHead>
-              <TableHead className="cursor-pointer" onClick={() => handleSort('score')}>
-                <div className="flex items-center gap-1">
+              <TableHead className="cursor-pointer hover:text-primary transition-colors w-32" onClick={() => handleSort('score')}>
+                <div className="flex items-center gap-2">
                   Score
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3 w-3 opacity-50" />
                 </div>
               </TableHead>
-              <TableHead className="cursor-pointer" onClick={() => handleSort('status')}>
-                <div className="flex items-center gap-1">
+              <TableHead className="cursor-pointer hover:text-primary transition-colors w-40" onClick={() => handleSort('status')}>
+                <div className="flex items-center gap-2">
                   Status
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3 w-3 opacity-50" />
                 </div>
               </TableHead>
               <TableHead>Target Market</TableHead>
-              <TableHead className="cursor-pointer" onClick={() => handleSort('createdAt')}>
-                <div className="flex items-center gap-1">
+              <TableHead className="cursor-pointer hover:text-primary transition-colors w-32" onClick={() => handleSort('createdAt')}>
+                <div className="flex items-center gap-2">
                   Created
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3 w-3 opacity-50" />
                 </div>
               </TableHead>
             </TableRow>
@@ -150,43 +157,64 @@ export function IdeasTable({ ideas, onIdeaClick }: IdeasTableProps) {
           <TableBody>
             {filteredAndSortedIdeas.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
-                  No ideas found. Create your first idea to get started!
+                <TableCell colSpan={5} className="text-center py-16">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
+                      <Search className="h-6 w-6 text-muted-foreground" />
+                    </div>
+                    <p className="text-muted-foreground">No ideas found matching your filters.</p>
+                    <Button variant="ghost" onClick={() => { setSearchQuery(''); setStatusFilter('all'); }}>
+                      Clear filters
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ) : (
-              filteredAndSortedIdeas.map((idea) => {
+              filteredAndSortedIdeas.map((idea, idx) => {
                 const score = calculateTotalScore(idea.scores);
-                const scoreColor = getScoreColor(score);
+                const scoreBadge = getScoreBadge(score);
+                const ScoreIcon = scoreBadge.icon;
                 return (
                   <TableRow
                     key={idea.id}
-                    className="cursor-pointer hover:bg-muted/50"
+                    className="cursor-pointer border-border/30 hover:bg-primary/5 transition-all duration-200 group"
                     onClick={() => onIdeaClick(idea)}
+                    style={{ animationDelay: `${idx * 0.05}s` }}
                   >
                     <TableCell>
-                      <div>
-                        <div className="font-medium">{idea.title}</div>
-                        <div className="text-sm text-muted-foreground line-clamp-1">
-                          {idea.description}
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                          <span className="text-lg">💡</span>
+                        </div>
+                        <div className="min-w-0">
+                          <div className="font-medium truncate group-hover:text-primary transition-colors">{idea.title}</div>
+                          <div className="text-sm text-muted-foreground line-clamp-1">
+                            {idea.description}
+                          </div>
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2">
-                        <div className={`w-2 h-2 rounded-full ${scoreColor}`} />
-                        <span className="font-medium">{score}</span>
+                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border ${scoreBadge.bg} ${scoreBadge.border}`}>
+                        <ScoreIcon className={`h-3.5 w-3.5 ${scoreBadge.color}`} />
+                        <span className={`font-semibold ${scoreBadge.color}`}>{score}</span>
                         <span className="text-xs text-muted-foreground">/40</span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge className={getStatusColor(idea.status)}>{idea.status}</Badge>
+                      <Badge className={`${getStatusColor(idea.status)} status-${idea.status.toLowerCase()}`}>
+                        {idea.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      <span className="text-muted-foreground">{idea.targetMarket}</span>
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground">
-                      {idea.targetMarket}
-                    </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {new Date(idea.createdAt).toLocaleDateString()}
+                      {new Date(idea.createdAt).toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: new Date(idea.createdAt).getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+                      })}
                     </TableCell>
                   </TableRow>
                 );
@@ -197,8 +225,16 @@ export function IdeasTable({ ideas, onIdeaClick }: IdeasTableProps) {
       </div>
 
       {/* Summary */}
-      <div className="text-sm text-muted-foreground">
-        Showing {filteredAndSortedIdeas.length} of {ideas.length} ideas
+      <div className="flex items-center justify-between text-sm">
+        <p className="text-muted-foreground">
+          Showing <span className="font-medium text-foreground">{filteredAndSortedIdeas.length}</span> of{' '}
+          <span className="font-medium text-foreground">{ideas.length}</span> ideas
+        </p>
+        {filteredAndSortedIdeas.length !== ideas.length && (
+          <Button variant="ghost" size="sm" onClick={() => { setSearchQuery(''); setStatusFilter('all'); }}>
+            Reset filters
+          </Button>
+        )}
       </div>
     </div>
   );
