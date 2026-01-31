@@ -1,0 +1,11 @@
+# Vercel Monitor Agent - Cron Configuration
+# Add these to your system crontab or use with cron skill
+
+# Every 30 minutes - Deployment health check
+*/30 * * * * cd /home/ubuntu/clawd/agents/vercel-monitor && ./scripts/check-deployments.sh >> logs/deploy-checks.log 2>&1
+
+# Daily at 9 AM IST (3:30 AM UTC) - Comprehensive audit
+30 3 * * * cd /home/ubuntu/clawd/agents/vercel-monitor && ./scripts/daily-audit.sh >> logs/daily-audit.log 2>&1
+
+# Weekly on Monday at 9 AM IST (3:30 AM UTC) - Security audit
+30 3 * * 1 cd /home/ubuntu/clawd/agents/vercel-monitor && ./scripts/weekly-security-audit.sh >> logs/security-audit.log 2>&1
