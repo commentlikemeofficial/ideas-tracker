@@ -58,24 +58,32 @@ sessions_send sessionKey:agent:main:subagent:54150d4e-87b3-4760-af77-badee943777
 ```
 → **Silent operation** - Steve will handle output
 
-### Social Media Manager - Content Handoff
-**At 9:15 AM and 9:15 PM IST (15 min after ContentClaw):**
+### Social Media Manager - Just-in-Time Delivery
+**CRITICAL: Send reminders 5 MINUTES before posting time, NOT early morning!**
 
-1. Check for new content:
-   ```bash
-   ls -la /home/ubuntu/clawd/tracking/autonomous_run_$(date +%Y-%m-%d)_posts.md
-   ```
-
-2. Generate package:
+**Morning Preparation (9:15 AM IST):**
+1. Generate content package:
    ```bash
    cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/generate-daily-package.sh
    ```
 
-3. **STEVE sends curated package to Rajesh** - Include:
-   - Top 3 posts (LinkedIn, X, Reddit)
-   - Optimal posting times
-   - Copy-paste ready
-   - Clear CTA
+2. Generate images for each platform:
+   ```bash
+   cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/generate-images.sh
+   ```
+
+3. **DO NOT send to user yet** - Schedule reminders for later
+
+**Just-in-Time Reminders (Send exactly at these times with image):**
+
+**10:55 AM IST** (5 min before LinkedIn):
+→ Send LinkedIn post content + image via Telegram
+
+**3:55 PM IST** (5 min before X/Twitter):
+→ Send X post content + image via Telegram
+
+**6:55 PM IST** (5 min before Reddit):
+→ Send Reddit post content + image via Telegram
 
 ### Scout Research Agent
 **Every 6 hours (09:00, 15:00, 21:00, 03:00 IST):**

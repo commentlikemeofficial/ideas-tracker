@@ -6,149 +6,180 @@ Manages content distribution across LinkedIn, X (Twitter), and Reddit - curating
 ## Philosophy
 **NO AUTO-POSTING** - All content is presented to you for final approval before publishing.
 
-## Responsibilities
+## NEW: Just-in-Time Delivery
+**Don't send early - user will forget!**
 
-### 1. 🎯 Content Curation
-- Review ContentClaw-generated posts
-- Select best-performing formats
-- Adapt tone for each platform
-- Schedule optimal posting times
+Send reminders **5 MINUTES BEFORE** optimal posting time with:
+- ✅ Copy-paste ready content
+- ✅ Generated image attached
+- ✅ Direct Telegram delivery
 
-### 2. 📊 Platform Strategy
+## Posting Schedule (IST)
 
-#### LinkedIn
-- **Best times:** Tue-Thu 10 AM - 12 PM IST
-- **Content type:** Long-form thought leadership
-- **Tone:** Professional, educational
-- **Hashtags:** 3-5 relevant tags
-
-#### X/Twitter
-- **Best times:** Tue-Thu 2 PM - 4 PM IST
-- **Content type:** Threads, hot takes, insights
-- **Tone:** Conversational, punchy
-- **Hashtags:** 1-2 max
-
-#### Reddit
-- **Best times:** Varies by subreddit
-- **Content type:** Educational, discussion starters
-- **Tone:** Community-focused, helpful
-- **Subreddits:** r/startups, r/SaaS, r/Entrepreneur, r/webdev
-
-### 3. 📈 Performance Tracking
-- Track engagement metrics
-- Identify top-performing content
-- A/B test headlines
-- Build content calendar
+| Platform | Optimal Time | Reminder Time | Image Style |
+|----------|--------------|---------------|-------------|
+| **LinkedIn** | 11:00 AM | **10:55 AM** | Professional, clean, corporate |
+| **X/Twitter** | 4:00 PM | **3:55 PM** | Bold, punchy, high contrast |
+| **Reddit** | 7:00 PM | **6:55 PM** | Informative, discussion-focused |
 
 ## Daily Workflow
 
-### Morning (9:15 AM IST)
+### Morning Preparation (9:15 AM IST)
 1. Check ContentClaw output from 9 AM run
 2. Review and rank all generated posts
 3. Select top 3 posts for the day
-4. Format for each platform
-5. **Present to you for approval**
+4. **Generate images** for each platform
+5. **Schedule reminders** - DO NOT send yet!
 
-### Evening (9:15 PM IST)
+### Reminder Delivery (Just-in-Time)
+- **10:55 AM** → Send LinkedIn post + image
+- **3:55 PM** → Send X post + image  
+- **6:55 PM** → Send Reddit post + image
+
+### Evening Preparation (9:15 PM IST)
 1. Check ContentClaw output from 9 PM run
-2. Review afternoon performance data
-3. Prepare next day's content
-4. **Present to you for approval**
+2. Prepare next day's content
+3. Generate images
+4. Schedule reminders
 
-## Output Format
+## Image Generation
 
-```markdown
-# 📱 Daily Content Package - 2026-01-31
+Each post gets a custom image:
 
-## Video Source: [Video Title]
-**URL:** [YouTube URL]
+### LinkedIn Images
+- Professional, minimalist design
+- Single concept visualization
+- Clean typography
+- Blue/purple color scheme
+
+### X/Twitter Images
+- Bold, high contrast
+- Attention-grabbing headlines
+- Square format (1200x1200)
+- Meme-style or infographic
+
+### Reddit Images
+- Educational diagrams
+- Screenshot-friendly
+- Clear, readable text
+- Informative graphics
+
+## Output Format (What User Receives)
+
+### Telegram Message + Image
+
+```
+🚨 POST IN 5 MINUTES! 🚨
+
+🟦 LINKEDIN POST (11:00 AM)
+Copy this now 👇
 
 ---
-
-## 🟦 LINKEDIN POST (Ready to Copy)
-
-**Optimal Time:** Today 11:00 AM IST
-
-```
-[Full post content here]
-```
-
-**Engagement Prediction:** High (educational content trending)
-**Hashtags:** #AI #MachineLearning #TechEducation
-
-[COPY BUTTON]
-
+I finally understand neural networks...
+[full post text]
 ---
 
-## 🐦 X/TWITTER POST (Ready to Copy)
+📎 Image attached - use this!
 
-**Optimal Time:** Today 4:00 PM IST
+⏰ Post at exactly 11:00 AM IST for max engagement
 
-```
-[Thread or single post]
-```
-
-**Engagement Prediction:** Medium (thread format)
-**Hashtags:** #AI #NeuralNetworks
-
-[COPY BUTTON]
-
----
-
-## 🔴 REDDIT POST (Ready to Copy)
-
-**Subreddit:** r/startups
-**Optimal Time:** Today 7:00 PM IST
-
-```
-[Post title]
-
-[Body content]
+#LinkedIn #AI #ContentReady
 ```
 
-**Engagement Prediction:** High (educational value)
+**+ Attached Image**
 
-[COPY BUTTON]
+## Integration Flow
 
----
-
-## 📊 WEEKLY CONTENT CALENDAR
-
-| Date | Platform | Content Type | Status |
-|------|----------|--------------|--------|
-| Today | LinkedIn | Educational | ⏳ Pending Approval |
-| Today | X | Thread | ⏳ Pending Approval |
-| Today | Reddit | Discussion | ⏳ Pending Approval |
-
----
-
-## 🎯 RECOMMENDATIONS
-
-1. **Post the LinkedIn version first** - highest predicted engagement
-2. **X thread at 4 PM** - captures US afternoon audience
-3. **Reddit tonight** - detailed discussion starter
-
-**Ready to post?** Just copy and paste!
+```
+ContentClaw generates content
+    ↓
+Social Media Manager curates (9:15 AM)
+    ↓
+Generate images for each platform
+    ↓
+Schedule 3 reminder messages
+    ↓
+10:55 AM → Send LinkedIn reminder + image
+3:55 PM → Send X reminder + image  
+6:55 PM → Send Reddit reminder + image
+    ↓
+User copies & posts immediately
 ```
 
-## Integration with ContentClaw
+## Image Prompts Template
 
-ContentClaw generates raw content → Social Media Manager curates & formats → You approve & post
+### For LinkedIn (Professional)
+```
+Create a professional LinkedIn header image for a post about:
+[TOPIC]
+
+Style: Clean, minimalist, corporate
+Colors: Blue, white, subtle gradients
+Elements: Abstract tech visualization, professional typography
+No text in image - just visuals
+Format: 1200x627px (LinkedIn optimal)
+```
+
+### For X/Twitter (Bold)
+```
+Create a bold Twitter/X image for a post about:
+[TOPIC]
+
+Style: High contrast, attention-grabbing, modern
+Colors: Dark background, bright accent colors
+Elements: Single striking visual, meme-worthy
+Format: 1200x1200px (square)
+```
+
+### For Reddit (Informative)
+```
+Create an informative image for a Reddit post about:
+[TOPIC]
+
+Style: Educational, diagram-style, clear
+Colors: Neutral, easy to read
+Elements: Infographic elements, icons, clean layout
+Format: 1200x800px (readable)
+```
 
 ## Commands
 
 ```bash
-# Generate daily content package
+# Generate daily content package (morning)
 ./scripts/generate-daily-package.sh
+
+# Generate images for today's content
+./scripts/generate-images.sh
+
+# Send reminder (called by cron at specific times)
+./scripts/send-reminder.sh linkedin
+./scripts/send-reminder.sh x
+./scripts/send-reminder.sh reddit
 
 # Check posting schedule
 ./scripts/show-schedule.sh
 
 # Review performance
 ./scripts/performance-report.sh
+```
 
-# Update content calendar
-./scripts/update-calendar.sh
+## Cron Schedule
+
+```cron
+# Morning preparation (after ContentClaw runs)
+15 9 * * * cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/generate-daily-package.sh && ./scripts/generate-images.sh
+
+# LinkedIn reminder (10:55 AM IST = 5:25 AM UTC)
+25 5 * * * cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/send-reminder.sh linkedin
+
+# X/Twitter reminder (3:55 PM IST = 10:25 AM UTC)
+25 10 * * * cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/send-reminder.sh x
+
+# Reddit reminder (6:55 PM IST = 1:25 PM UTC)
+25 13 * * * cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/send-reminder.sh reddit
+
+# Evening preparation
+15 21 * * * cd /home/ubuntu/clawd/agents/social-media-manager && ./scripts/generate-daily-package.sh && ./scripts/generate-images.sh
 ```
 
 ## Files Managed
@@ -157,3 +188,5 @@ ContentClaw generates raw content → Social Media Manager curates & formats →
 - `performance-tracking.md` - Engagement metrics
 - `best-performing-posts.md` - Top content archive
 - `daily-packages/` - Daily content ready for approval
+- `images/` - Generated images for each platform
+- `scheduled-reminders.json` - Reminder schedule tracking
