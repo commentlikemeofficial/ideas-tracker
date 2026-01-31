@@ -135,8 +135,39 @@ cd /home/ubuntu/clawd/agents/code-reviewer && ./scripts/review-pr.sh <pr-number>
 - **You see:** Only actionable items and summaries
 - **Silent ops:** Routine checks, healthy status, background tasks
 
+### AI Developer Agent
+
+**On new project request from Scout/Tech Architect:**
+```bash
+cd /home/ubuntu/clawd/agents/ai-developer && ./scripts/build-project.sh --name "project" --type "saas" --idea "description"
+```
+→ Works with Tech Architect on system design
+→ Builds in 30-45 min sessions with breaks
+→ Sends code to Code Reviewer
+→ Deploys via Vercel Monitor
+→ **All free tier only!**
+
+**Rate limit management:**
+- Check limits: `./scripts/check-rate-limits.sh`
+- Use Kimi CLI with 15-20 min breaks
+- Fallback to DeepSeek/Gemini if limited
+- Log all builds to track usage
+
+**On feature/bug:**
+```bash
+./scripts/add-feature.sh --project "app" --feature "auth"
+./scripts/fix-bug.sh --project "app" --issue "login-error"
+```
+
+## Communication Rules
+- **Agents → Steve:** All reports go to me first
+- **Steve filters:** I decide what needs your attention
+- **You see:** Only actionable items and summaries
+- **Silent ops:** Routine checks, healthy status, background tasks
+
 ## When Steve Alerts You
-✅ Content ready for posting
+✅ Content ready for posting (5 min warning)
+✅ Project build complete
 ⚠️ Security issues found
 🚨 Deployment failures
 📊 Daily/weekly summaries
