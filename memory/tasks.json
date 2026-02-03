@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "description": "Test task-master skill",
+      "priority": "high",
+      "deadline": "2026-01-30",
+      "status": "completed",
+      "context": "Skill Development",
+      "created_at": "2026-01-28T17:50:12.864519",
+      "completed_at": "2026-01-29T18:44:31.758499"
+    },
+    {
+      "id": 2,
+      "description": "Test adding tasks via CLI",
+      "priority": "medium",
+      "deadline": "2026-01-31",
+      "status": "completed",
+      "context": "Skill Testing",
+      "created_at": "2026-01-29T18:44:28.589286",
+      "completed_at": "2026-01-29T18:44:28.664258"
+    }
+  ],
+  "next_id": 3
+}

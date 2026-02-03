@@ -1,0 +1,25 @@
+The $37B AI wave is here—and the data tells a fascinating story.
+
+Just read Menlo Ventures' 2025 State of Generative AI in the Enterprise report. Some numbers that made me pause:
+
+→ Enterprises spent $37B on generative AI in 2025 (up 3.2x from $11.5B in 2024)
+→ AI is now 6% of the entire global SaaS market... after just 3 years
+→ 76% of AI solutions are purchased, not built internally (was 53% last year)
+
+What's striking: AI buyers convert at 47% vs 25% for traditional SaaS. Nearly 2x higher.
+
+Why? Because the value is immediate and obvious. Not speculative. Not "maybe in 18 months." Right now productivity gains.
+
+The biggest surprise: Startups now capture 63% of the AI application market. Incumbents had every advantage—distribution, data moats, balance sheets—and they're still losing ground.
+
+In coding alone (a $4B category now), startups like Cursor are eating GitHub Copilot's lunch by shipping faster, being model-agnostic, and winning developer love first.
+
+My take: We're past the experimentation phase. Enterprises aren't asking "should we use AI?" anymore. They're asking "which AI tools should we buy?"
+
+If you're building AI-native products, the window is wide open. But product velocity matters more than ever.
+
+What's your observation on AI adoption in your industry?
+
+#AI #SaaS #EnterpriseAI #StartupLife #BuildingInPublic #VentureCapital
+
+Source: Menlo Ventures 2025 State of Generative AI in the Enterprise Report

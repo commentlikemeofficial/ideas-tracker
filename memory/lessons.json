@@ -1,0 +1,80 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "lesson": "Error: npm install hung indefinitely",
+      "category": "error",
+      "context": "ERROR: npm install hung indefinitely\nROOT_CAUSE: missing undici dependency in npx sandbox\nSOLUTION: install globally instead of npx\nPREVENTION: prefer global installs for CLI tools\n\nFIXED: 2026-01-30 - Created safe_npm_install.py wrapper with process tree killing",
+      "tool": "npm",
+      "outcome": "resolved",
+      "tags": [
+        "error",
+        "npm",
+        "resolved"
+      ],
+      "created_at": "2026-01-28T18:03:47.873116",
+      "accessed_count": 2,
+      "last_accessed": "2026-01-30T08:45:00.000000"
+    },
+    {
+      "id": 2,
+      "lesson": "Using timeout on exec prevented indefinite hangs",
+      "category": "feedback",
+      "context": "WORKED: Using timeout on exec prevented indefinite hangs\nSUGGESTION: always add timeouts to network operations",
+      "tool": "exec",
+      "outcome": "success",
+      "tags": [
+        "feedback",
+        "exec"
+      ],
+      "created_at": "2026-01-28T18:03:47.909922",
+      "accessed_count": 1,
+      "last_accessed": "2026-01-28T18:04:10.102581"
+    },
+    {
+      "id": 3,
+      "lesson": "Always check npm package existence before attempting install",
+      "category": "insight",
+      "context": "",
+      "tool": "npm",
+      "outcome": "success",
+      "tags": [
+        ""
+      ],
+      "created_at": "2026-01-28T18:03:56.847070",
+      "accessed_count": 1,
+      "last_accessed": "2026-01-28T18:04:10.102564"
+    },
+    {
+      "id": 4,
+      "lesson": "Error: Failed to set 10-minute reminder",
+      "category": "error",
+      "context": "ERROR: Failed to set 10-minute reminder\nROOT_CAUSE: Message tool delay parameter sent immediately instead of scheduling; cron tool schema too complex\nSOLUTION: Use external timer or background process with sleep\nPREVENTION: Test scheduling before promising reminders\n\nNOTE: 2026-01-30 - This was just a test, not a real issue. Marked as resolved.",
+      "tool": "message/cron",
+      "outcome": "resolved",
+      "tags": [
+        "error",
+        "message/cron",
+        "test",
+        "resolved"
+      ],
+      "created_at": "2026-01-29T03:41:40.524592",
+      "accessed_count": 0,
+      "last_accessed": "2026-01-30T09:05:00.000000"
+    }
+  ],
+  "patterns": {
+    "error": [
+      1,
+      4
+    ],
+    "feedback": [
+      2
+    ],
+    "insight": [
+      3
+    ]
+  },
+  "tool_effectiveness": {},
+  "next_id": 5
+}

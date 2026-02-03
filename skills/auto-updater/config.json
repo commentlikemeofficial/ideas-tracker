@@ -1,0 +1,13 @@
+{
+  "name": "auto-updater",
+  "version": "1.0.0",
+  "schedule": "0 3 * * *",
+  "timezone": "Asia/Kolkata",
+  "silent": false,
+  "notify_daily": true,
+  "notify_on_failure": true,
+  "notify_on_restart": true,
+  "backup_before_update": true,
+  "backup_dir": "~/.clawdbot/backups",
+  "log_file": "~/.clawdbot/auto-update.log"
+}
