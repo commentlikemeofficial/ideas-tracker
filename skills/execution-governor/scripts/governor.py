@@ -200,7 +200,28 @@ def mark_complete(initiative_id):
 
 def main():
     if len(sys.argv) < 2:
+        # No arguments - run check by default
         sys.exit(governor_check())
+    
+    if sys.argv[1] in ("--help", "-h"):
+        print("Usage: governor.py [check|register|activity|complete|disable|enable|status]")
+        print("")
+        print("Execution Governor - Prevent stalled work and track initiatives")
+        print("")
+        print("Commands:")
+        print("  check                           - Run governor check (default)")
+        print("  register <name> <agent> <expected> [--urgent]  - Register new initiative")
+        print("  activity <initiative_id>        - Update activity timestamp")
+        print("  complete <initiative_id>        - Mark initiative complete")
+        print("  disable                         - Disable governor checks")
+        print("  enable                          - Enable governor checks")
+        print("  status                          - Show governor status")
+        print("")
+        print("Examples:")
+        print('  governor.py register "Build API" coding-agent "Working API endpoint"')
+        print('  governor.py check')
+        print('  governor.py activity coding-agent-1')
+        sys.exit(0)
     
     command = sys.argv[1]
     

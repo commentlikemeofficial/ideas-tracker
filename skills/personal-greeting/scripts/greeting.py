@@ -301,6 +301,24 @@ def auto_greeting():
             return f"👋 Evening! Winding down or grinding on?\n\n{random.choice(MOTIVATIONAL_QUOTES)}"
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] in ("--help", "-h"):
+        print("Usage: greeting.py [morning|night|weekend|auto|time]")
+        print("")
+        print("Context-aware greetings based on time, activity, and patterns.")
+        print("")
+        print("Commands:")
+        print("  morning   - Morning greeting with today's tasks")
+        print("  night     - Evening greeting with today's accomplishments")
+        print("  weekend   - Weekend greeting with fun/learning suggestions")
+        print("  auto      - Auto-detect appropriate greeting (default)")
+        print("  time      - Show current time info")
+        print("")
+        print("Examples:")
+        print("  greeting.py           # Auto-detect greeting")
+        print("  greeting.py morning   # Morning briefing")
+        print("  greeting.py night     # End-of-day summary")
+        sys.exit(0)
+    
     if len(sys.argv) < 2:
         # Auto-detect and print appropriate greeting
         print(auto_greeting())
@@ -326,6 +344,7 @@ def main():
     else:
         print(f"Unknown command: {cmd}")
         print("Usage: greeting.py [morning|night|weekend|auto|time]")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

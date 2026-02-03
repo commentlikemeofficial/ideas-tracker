@@ -1,115 +1,78 @@
----
-name: self-improving
-description: Capture errors, lessons learned, and feedback to build institutional knowledge that improves future performance. Use when mistakes happen, better approaches are discovered, user preferences are expressed, or when starting tasks similar to past work. Triggers include "remember this", "don't do X again", "that worked well", "lesson learned", or before starting complex/multi-step work.
----
+# Self-Improving Skill
 
-# Self-Improving
+## Purpose
+Capture errors, lessons, and feedback to build institutional knowledge and prevent repeated mistakes.
 
-Build a knowledge base of what works, what doesn't, and why. Automatically apply those lessons to future tasks.
-
-## Core Philosophy
-
-Every mistake is data. Every success is a pattern. Capture both.
-
-## Quick Commands
+## Usage
 
 ```bash
-# Add a lesson
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py add-lesson "Always test scripts before packaging" insight exec
+# Add a general lesson
+python3 skills/self-improving/scripts/learner.py add-lesson <lesson> <category> [tool] [tags]
 
-# Log an error with solution
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py add-error \
-  "npm install hung indefinitely" \
-  "missing undici dependency in npx sandbox" \
-  "install globally instead of npx" \
-  "npm" \
-  "prefer global installs for CLI tools"
+# Add an error with solution
+python3 skills/self-improving/scripts/learner.py add-error <error> <root_cause> <solution> [tool] [prevention]
 
-# Capture what worked
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py add-feedback \
-  "Using timeout on exec prevented indefinite hangs" \
-  "" \
-  "always add timeouts to network operations"
-
-# Get suggestions for current task
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py suggest "deploy to AWS"
+# Add feedback on what worked
+python3 skills/self-improving/scripts/learner.py add-feedback <what_worked> [what_didnt] [suggestion] [tool]
 
 # Search lessons
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py search "npm"
+python3 skills/self-improving/scripts/learner.py search [query]
 
-# Get tool-specific wisdom
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py tool "git"
+# Get tool-specific guidance
+python3 skills/self-improving/scripts/learner.py tool <tool_name>
 
-# See recent errors
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py errors
+# Get common errors
+python3 skills/self-improving/scripts/learner.py errors [tool]
+
+# Suggest approach based on past tasks
+python3 skills/self-improving/scripts/learner.py suggest <task_description>
+
+# Check for recent lessons (for cron/heartbeat)
+python3 skills/self-improving/scripts/check_lessons.py
 ```
 
 ## Categories
+- error - Mistakes and how to fix them
+- insight - General learnings
+- workaround - Temporary solutions
+- preference - User preferences
+- pattern - Recurring patterns
 
-- **error**: Mistakes, failures, what broke and why
-- **insight**: Realizations, better ways, "aha" moments  
-- **workaround**: Temporary fixes, hacks that work
-- **preference**: User preferences on style, approach, output
-- **pattern**: Reusable solutions, templates, architectures
-- **feedback**: What worked/didn't in completed tasks
+## Examples
 
-## When to Capture
-
-**Always capture:**
-- Commands that failed unexpectedly
-- Workarounds that took time to find
-- User corrections ("no, do it this way instead")
-- Performance bottlenecks discovered
-- Security or safety lessons
-
-**Capture when significant:**
-- New tool/workflows that work well
-- Architectural decisions and rationale
-- Time-saving shortcuts
-- Better ways to phrase/code/build
-
-## Integration Patterns
-
-**Before starting similar work:**
 ```bash
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py suggest "task description"
+# Log an error
+python3 skills/self-improving/scripts/learner.py add-error \
+    "Database connection timeout" \
+    "Connection pool exhausted" \
+    "Increase pool size in config" \
+    "postgresql" \
+    "Monitor connection count"
+
+# Log what worked
+python3 skills/self-improving/scripts/learner.py add-feedback \
+    "Using async/await improved performance by 3x" \
+    "" \
+    "Apply to other I/O bound operations" \
+    "python"
+
+# Search for relevant lessons
+python3 skills/self-improving/scripts/learner.py search "database"
+
+# Get suggestions before starting a task
+python3 skills/self-improving/scripts/learner.py suggest "Deploy to production"
 ```
 
-**After errors:**
+## Data Storage
+Lessons stored in: `/home/ubuntu/clawd/memory/lessons.json`
+
+## Scripts
+- `learner.py` - Main lesson management
+- `check_lessons.py` - Surface relevant lessons
+
+## Integration
+Use before starting similar tasks:
 ```bash
-python3 /home/ubuntu/clawd/skills/self-improving/scripts/learner.py add-error "..." "..." "..."
+# Check for relevant lessons
+python3 skills/self-improving/scripts/learner.py suggest "$TASK_DESCRIPTION"
 ```
-
-**During heartbeats:**
-The check_lessons.py script surfaces recent errors and high-value lessons automatically.
-
-## Storage
-
-Lessons stored at: `/home/ubuntu/clawd/memory/lessons.json`
-
-Structure tracks:
-- What was learned
-- Context/circumstances
-- How often it's been accessed
-- When it was last relevant
-
-## Retrieval
-
-Lessons are retrieved by:
-1. **Keyword matching** in task descriptions
-2. **Tool association** (npm, git, aws, etc.)
-3. **Category filtering** (errors, patterns, etc.)
-4. **Access frequency** (most-used lessons surface first)
-
-## Example Workflow
-
-1. **Task**: Deploy to production
-2. **Check**: `learner.py suggest "deploy to production"`
-3. **Surface**: "Lesson #5: Always run tests before deploy"
-4. **Execute**: Run tests
-5. **Result**: Success
-6. **Capture**: `learner.py add-feedback "Running tests caught 2 bugs pre-deploy"`
-
-## Data Schema
-
-See [references/schema.md](references/schema.md) for full structure.

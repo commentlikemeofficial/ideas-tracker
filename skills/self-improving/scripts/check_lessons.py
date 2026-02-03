@@ -5,8 +5,10 @@ Check for lessons that should be surfaced before starting similar tasks
 import sys
 import json
 from pathlib import Path
+from datetime import datetime, date
 
 LESSONS_FILE = Path("/home/ubuntu/clawd/memory/lessons.json")
+SHOWN_FILE = Path("/home/ubuntu/clawd/memory/lessons-shown-today.json")
 
 def load_lessons():
     if LESSONS_FILE.exists():
@@ -37,14 +39,35 @@ def get_high_impact_lessons(min_accessed=2):
     """Get frequently-accessed lessons (high value), excluding resolved."""
     data = load_lessons()
     
+    # Load already-shown lessons for today
+    shown_today = set()
+    if SHOWN_FILE.exists():
+        try:
+            with open(SHOWN_FILE) as f:
+                shown_data = json.load(f)
+                if shown_data.get("date") == str(date.today()):
+                    shown_today = set(shown_data.get("lessons", []))
+        except:
+            pass
+    
     impactful = [
         l for l in data["lessons"] 
         if l.get("accessed_count", 0) >= min_accessed 
         and l.get("outcome") != "resolved"
+        and l["id"] not in shown_today  # Skip already shown today
     ]
     impactful.sort(key=lambda x: -x.get("accessed_count", 0))
     
     return impactful[:5]
+
+def mark_shown(lesson_ids):
+    """Mark lessons as shown today."""
+    SHOWN_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(SHOWN_FILE, 'w') as f:
+        json.dump({
+            "date": str(date.today()),
+            "lessons": list(lesson_ids)
+        }, f)
 
 if __name__ == "__main__":
     # Handle --help
@@ -72,13 +95,19 @@ if __name__ == "__main__":
         # Check for high-impact lessons
         impactful = get_high_impact_lessons()
         
+        shown_ids = set()
+        
         if impactful:
             output.append("\n📚 HIGH-VALUE LESSONS:")
             for l in impactful[:3]:
                 output.append(f"  • #{l['id']} (used {l.get('accessed_count', 0)}x): {l['lesson'][:60]}")
+                shown_ids.add(l["id"])
         
         if output:
             print("\n".join(output))
+            # Mark shown lessons so we don't repeat them today
+            if shown_ids:
+                mark_shown(shown_ids)
     except Exception as e:
         print(f"Error checking lessons: {e}", file=sys.stderr)
         sys.exit(1)

@@ -1,6 +1,19 @@
 {
-  "initiatives": [],
-  "next_id": 1,
+  "initiatives": [
+    {
+      "id": "ai-developer-1",
+      "name": "DevUtils Tools Platform",
+      "agent": "ai-developer",
+      "started_at": "2026-02-03T10:15:52.947997",
+      "last_activity": "2026-02-03T10:15:52.948011",
+      "status": "completed",
+      "expected_output": "Build developer utilities platform",
+      "escalation_count": 0,
+      "time_sensitive": false,
+      "waiting_on": null
+    }
+  ],
+  "next_id": 2,
   "config": {
     "default_threshold_hours": 48,
     "auto_recommend_kill_after": 3,

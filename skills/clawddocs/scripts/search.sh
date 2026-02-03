@@ -1,8 +1,25 @@
 #!/bin/bash
 # Search docs by keyword using the sitemap
-if [ -z "$1" ]; then
+
+if [ -z "$1" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
   echo "Usage: search.sh <keyword>"
-  exit 1
+  echo ""
+  echo "Search Clawdbot documentation by keyword"
+  echo ""
+  echo "Arguments:"
+  echo "  keyword - Search term"
+  echo ""
+  echo "Examples:"
+  echo "  search.sh gateway"
+  echo "  search.sh browser"
+  echo ""
+  echo "Note: Run sitemap.sh first to cache the documentation structure"
+  
+  if [ -z "$1" ]; then
+    exit 1
+  else
+    exit 0
+  fi
 fi
 
 echo "Searching docs for: $1"

@@ -13,8 +13,8 @@
         "resolved"
       ],
       "created_at": "2026-01-28T18:03:47.873116",
-      "accessed_count": 3,
-      "last_accessed": "2026-02-03T07:50:44.531889"
+      "accessed_count": 4,
+      "last_accessed": "2026-02-03T10:19:53.525778"
     },
     {
       "id": 2,
@@ -28,8 +28,8 @@
         "exec"
       ],
       "created_at": "2026-01-28T18:03:47.909922",
-      "accessed_count": 2,
-      "last_accessed": "2026-02-03T07:50:44.531888"
+      "accessed_count": 3,
+      "last_accessed": "2026-02-03T10:19:53.525777"
     },
     {
       "id": 3,
@@ -42,8 +42,8 @@
         ""
       ],
       "created_at": "2026-01-28T18:03:56.847070",
-      "accessed_count": 2,
-      "last_accessed": "2026-02-03T07:50:44.531887"
+      "accessed_count": 3,
+      "last_accessed": "2026-02-03T10:19:53.525775"
     },
     {
       "id": 4,
@@ -59,8 +59,8 @@
         "resolved"
       ],
       "created_at": "2026-01-29T03:41:40.524592",
-      "accessed_count": 1,
-      "last_accessed": "2026-02-03T07:50:44.531869"
+      "accessed_count": 4,
+      "last_accessed": "2026-02-03T10:24:20.487531"
     }
   ],
   "patterns": {

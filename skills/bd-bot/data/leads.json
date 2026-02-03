@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1770114253,
+    "date": "2026-02-03",
+    "company": "Test Company 2",
+    "contact": "John Doe",
+    "role": "Developer",
+    "source": "LinkedIn",
+    "status": "New",
+    "notes": "Test notes"
+  }
+]

@@ -22,7 +22,25 @@ def test_script(script_path):
     except Exception as e:
         return False, str(e)
 
+def show_help():
+    print("""Tool Testing Script for clawd workspace
+
+Usage: test-tools.py [options]
+
+Options:
+  --help          Show this help message
+
+Description:
+  Tests all skill scripts and reports issues.
+  Runs --help on each Python script in skills/ directory.
+  Reports working and broken tools.
+""")
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--help':
+        show_help()
+        return 0
+    
     print("🔧 Testing clawd tools...\n")
     
     broken = []

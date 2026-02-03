@@ -2,8 +2,12 @@
 """
 Auto-updater: Daily updates with full summary report
 Runs via cron, backs up before updates, reports what changed
+
+Usage: auto-update.py [--help]
+       auto-update.py        Run the auto-update
 """
 import subprocess
+import sys
 import json
 import os
 import shutil
@@ -122,7 +126,26 @@ def update_skills():
     except Exception as e:
         return False, [], f"Skill update error: {e}"
 
+def show_help():
+    print("""Auto-updater: Daily updates with full summary report
+
+Usage: auto-update.py [options]
+
+Options:
+  --help          Show this help message
+
+Description:
+  Runs via cron, backs up before updates, reports what changed.
+  Updates Clawdbot itself and all installed skills.
+  Creates backups in ~/.clawdbot/backups/
+  Logs to ~/.clawdbot/auto-update.log
+""")
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--help':
+        show_help()
+        sys.exit(0)
+    
     log("="*60)
     log("🔄 Starting daily auto-update")
     log("="*60)

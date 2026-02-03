@@ -1,6 +1,19 @@
 #!/bin/bash
 # Steve Status - Quick health check
 
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  echo "Usage: steve-status.sh"
+  echo ""
+  echo "Quick health check for Steve/Clawdbot"
+  echo ""
+  echo "Shows:"
+  echo "  • Recent response times"
+  echo "  • Memory usage"
+  echo "  • Recent errors"
+  echo "  • Disk usage"
+  exit 0
+fi
+
 echo "=== Steve Health Check ==="
 echo ""
 

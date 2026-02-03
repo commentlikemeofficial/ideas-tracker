@@ -3,11 +3,28 @@
 
 COMPANY="${1:-}"
 
-if [ -z "$COMPANY" ]; then
-    echo "Usage: ./draft-pitch.sh 'Company Name'"
+if [ -z "$COMPANY" ] || [ "$COMPANY" = "--help" ] || [ "$COMPANY" = "-h" ]; then
+    echo "Usage: draft-pitch.sh 'Company Name'"
     echo ""
-    echo "Generates a personalized pitch using your consently.in case study"
-    exit 1
+    echo "Generate a personalized pitch using your consently.in case study"
+    echo ""
+    echo "Arguments:"
+    echo "  Company Name - Target company name (required)"
+    echo ""
+    echo "Examples:"
+    echo "  ./draft-pitch.sh 'Infloso AI'"
+    echo "  ./draft-pitch.sh 'TechCorp Inc'"
+    echo ""
+    echo "The pitch template will include:"
+    echo "  • Your consently.in case study"
+    echo "  • GitHub stats and achievements"
+    echo "  • Follow-up message template"
+    
+    if [ -z "$COMPANY" ]; then
+        exit 1
+    else
+        exit 0
+    fi
 fi
 
 cat << 'EOF'

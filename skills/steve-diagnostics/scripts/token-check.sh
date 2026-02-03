@@ -1,6 +1,15 @@
 #!/bin/bash
 # Token check - warn if context getting heavy
 
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  echo "Usage: token-check.sh"
+  echo ""
+  echo "Check context size and memory usage"
+  echo ""
+  echo "Warns if context is getting heavy (>1000 lines)"
+  exit 0
+fi
+
 MEMORY_DIR="/home/ubuntu/clawd/memory"
 
 echo "=== Context Size Check ==="
