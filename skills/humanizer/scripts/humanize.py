@@ -150,9 +150,15 @@ def humanize(text, tone='casual', imperfection='medium'):
     return result
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("--help", "-h"):
         print("Usage: humanize.py <text> [--tone casual|professional|enthusiastic|blunt]")
-        sys.exit(1)
+        print("\nTransform AI-generated text into natural human-sounding prose.")
+        print("\nOptions:")
+        print("  --tone casual|professional|enthusiastic|blunt  Set the tone (default: casual)")
+        print("\nExamples:")
+        print('  humanize.py "Furthermore, it is important to note that..."')
+        print('  humanize.py "We are pleased to announce..." --tone enthusiastic')
+        sys.exit(0 if sys.argv[1] in ("--help", "-h") else 1)
     
     text = sys.argv[1]
     tone = 'casual'

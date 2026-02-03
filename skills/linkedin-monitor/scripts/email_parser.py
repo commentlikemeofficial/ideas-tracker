@@ -161,6 +161,15 @@ def store_notification(data):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] in ("--help", "-h"):
+        print("Usage: email_parser.py [email_text]")
+        print("\nParses forwarded LinkedIn notification emails.")
+        print("If no email_text provided, reads from stdin.")
+        print("\nExamples:")
+        print('  email_parser.py "John wants to connect with you..."')
+        print('  cat email.txt | email_parser.py')
+        sys.exit(0)
+    
     if len(sys.argv) < 2:
         # Read from stdin
         email_text = sys.stdin.read()

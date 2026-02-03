@@ -321,10 +321,14 @@ def export_dot(output_file="graph.dot"):
     return output_file
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("--help", "-h"):
         print("Usage: graph.py <command> [args]")
         print("Commands: process, show, find, related, stats, export")
-        sys.exit(1)
+        print("\nExamples:")
+        print("  graph.py process 'Extract entities from this text'")
+        print("  graph.py show Python")
+        print("  graph.py stats")
+        sys.exit(0 if sys.argv[1] in ("--help", "-h") else 1)
     
     cmd = sys.argv[1]
     

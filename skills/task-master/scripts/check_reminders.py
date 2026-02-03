@@ -59,9 +59,42 @@ def check_reminders(hours=24):
     return "\n".join(output) if output else ""
 
 if __name__ == "__main__":
-    hours = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[1] == "--hours" else 24
-    result = check_reminders(hours)
-    if result:
-        print(result)
+    # Handle --help
+    if len(sys.argv) > 1 and sys.argv[1] in ("--help", "-h"):
+        print("Usage: check_reminders.py [--hours HOURS]")
+        print("")
+        print("Check for upcoming task deadlines and overdue tasks.")
+        print("")
+        print("Options:")
+        print("  --hours HOURS  Look ahead window in hours (default: 24)")
+        print("")
+        print("Examples:")
+        print("  check_reminders.py           # Check next 24 hours")
+        print("  check_reminders.py --hours 48  # Check next 48 hours")
         sys.exit(0)
-    sys.exit(1)  # No reminders = exit 1 so cron knows not to send message
+    
+    # Parse arguments with error handling
+    hours = 24
+    if len(sys.argv) > 2 and sys.argv[1] == "--hours":
+        try:
+            hours = int(sys.argv[2])
+            if hours < 1 or hours > 8760:  # Max 1 year
+                print("Error: Hours must be between 1 and 8760", file=sys.stderr)
+                sys.exit(1)
+        except ValueError:
+            print("Error: Hours must be a valid integer", file=sys.stderr)
+            sys.exit(1)
+    elif len(sys.argv) > 1:
+        print("Error: Unknown argument. Use --help for usage.", file=sys.stderr)
+        sys.exit(1)
+    
+    try:
+        result = check_reminders(hours)
+        if result:
+            print(result)
+    except Exception as e:
+        print(f"Error checking reminders: {e}", file=sys.stderr)
+        sys.exit(1)
+    
+    # Always exit 0 - empty output just means no reminders (not an error)
+    sys.exit(0)

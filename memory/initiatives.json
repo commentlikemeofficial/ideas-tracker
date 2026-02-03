@@ -1,0 +1,9 @@
+{
+  "initiatives": [],
+  "next_id": 1,
+  "config": {
+    "default_threshold_hours": 48,
+    "auto_recommend_kill_after": 3,
+    "enabled": true
+  }
+}

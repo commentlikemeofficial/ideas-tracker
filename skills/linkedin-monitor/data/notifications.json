@@ -7,5 +7,30 @@
     "date": "2026-01-29T17:31:28.138329",
     "action": "pending",
     "notes": ""
+  },
+  {
+    "type": "unknown",
+    "raw": "--help"
+  },
+  {
+    "type": "unknown",
+    "raw": "--help"
+  },
+  {
+    "type": "unknown",
+    "raw": "--help"
+  },
+  {
+    "type": "unknown",
+    "raw": "--help"
+  },
+  {
+    "type": "connection_request",
+    "from": "John",
+    "title": "",
+    "company": "",
+    "date": "2026-02-03T07:51:02.777735",
+    "action": "pending",
+    "notes": ""
   }
 ]

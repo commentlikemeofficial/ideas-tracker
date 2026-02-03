@@ -28,6 +28,22 @@ Surface recent entities and strong connections:
 python3 /home/ubuntu/clawd/skills/knowledge-graph/scripts/check_graph.py
 ```
 
+## Execution Governor Checks
+
+Every 6 hours, check for stalled initiatives, duplicates, and circular effort:
+
+```bash
+python3 /home/ubuntu/clawd/skills/execution-governor/scripts/governor.py check
+```
+
+If output is non-empty, escalate immediately with binary decision (kill/proceed/simplify).
+
+**Governor Constraints:**
+- Observation + escalation only
+- No content creation, no research, no execution
+- Immediate Telegram notification (no batching)
+- Auto-recommend kill after 3 escalations
+
 ## Morning Brief Rule
 
 **Rule:** If Rajesh says "Good Morning" → trigger morning brief immediately.

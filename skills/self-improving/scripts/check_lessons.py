@@ -47,25 +47,41 @@ def get_high_impact_lessons(min_accessed=2):
     return impactful[:5]
 
 if __name__ == "__main__":
-    # Check for recent errors
-    recent_errors = get_recent_errors()
+    # Handle --help
+    if len(sys.argv) > 1 and sys.argv[1] in ("--help", "-h"):
+        print("Usage: check_lessons.py")
+        print("")
+        print("Check for recent errors and high-value lessons.")
+        print("Shows errors from last 48h and most-accessed lessons.")
+        print("")
+        print("Examples:")
+        print("  check_lessons.py")
+        sys.exit(0)
     
-    output = []
+    try:
+        # Check for recent errors
+        recent_errors = get_recent_errors()
+        
+        output = []
+        
+        if recent_errors:
+            output.append("🚨 RECENT ERRORS (last 48h):")
+            for e in recent_errors[:3]:
+                output.append(f"  • #{e['id']}: {e['lesson'][:60]}")
+        
+        # Check for high-impact lessons
+        impactful = get_high_impact_lessons()
+        
+        if impactful:
+            output.append("\n📚 HIGH-VALUE LESSONS:")
+            for l in impactful[:3]:
+                output.append(f"  • #{l['id']} (used {l.get('accessed_count', 0)}x): {l['lesson'][:60]}")
+        
+        if output:
+            print("\n".join(output))
+    except Exception as e:
+        print(f"Error checking lessons: {e}", file=sys.stderr)
+        sys.exit(1)
     
-    if recent_errors:
-        output.append("🚨 RECENT ERRORS (last 48h):")
-        for e in recent_errors[:3]:
-            output.append(f"  • #{e['id']}: {e['lesson'][:60]}")
-    
-    # Check for high-impact lessons
-    impactful = get_high_impact_lessons()
-    
-    if impactful:
-        output.append("\n📚 HIGH-VALUE LESSONS:")
-        for l in impactful[:3]:
-            output.append(f"  • #{l['id']} (used {l.get('accessed_count', 0)}x): {l['lesson'][:60]}")
-    
-    if output:
-        print("\n".join(output))
-    else:
-        sys.exit(1)  # No output = no reminders needed
+    # Always exit 0 - empty output just means no lessons to surface (not an error)
+    sys.exit(0)

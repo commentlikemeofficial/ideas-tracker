@@ -107,14 +107,14 @@ def list_connections(status=None):
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("--help", "-h"):
         print("Usage: connection_tracker.py <command> [args]")
         print("\nCommands:")
         print("  add <name> [title] [company] [notes]  - Add connection")
         print("  update <name> <status>                - Update status (pending/connected/ignored)")
         print("  suggest                               - Show follow-up suggestions")
         print("  list [status]                         - List all connections")
-        sys.exit(1)
+        sys.exit(0 if sys.argv[1] in ("--help", "-h") else 1)
     
     command = sys.argv[1]
     

@@ -122,6 +122,19 @@ def format_task_list(tasks, verbose=False):
     return "\n".join(lines)
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] in ("--help", "-h"):
+        print("Usage: task_manager.py <command> [args]")
+        print("\nCommands:")
+        print("  add <desc> [priority] [deadline] [context]  - Add a new task")
+        print("  list [status] [sort_by]                     - List tasks (default: open, by priority)")
+        print("  complete <task_id>                          - Mark task as complete")
+        print("  delete <task_id>                            - Delete a task")
+        print("  upcoming [hours]                            - Show upcoming deadlines")
+        print("\nExamples:")
+        print('  task_manager.py add "Fix bug" high 2024-12-31 "urgent"')
+        print('  task_manager.py list all deadline')
+        sys.exit(0)
+    
     cmd = sys.argv[1] if len(sys.argv) > 1 else "list"
     
     if cmd == "add":

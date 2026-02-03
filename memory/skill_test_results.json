@@ -1,0 +1,320 @@
+{
+  "timestamp": "2026-02-03T07:50:49.837234",
+  "total_tests": 37,
+  "passed": 35,
+  "failed": 2,
+  "failed_details": [
+    {
+      "script": "skills/auto-updater/scripts/auto-update.py",
+      "args": [],
+      "exit_code": null,
+      "stderr": "",
+      "error": "Timeout"
+    },
+    {
+      "script": "skills/steve-diagnostics/scripts/test-tools.py",
+      "args": [],
+      "exit_code": null,
+      "stderr": "",
+      "error": "Timeout"
+    }
+  ],
+  "all_results": [
+    {
+      "script": "skills/auto-updater/scripts/auto-update.py",
+      "success": false,
+      "exit_code": null,
+      "stdout": "",
+      "stderr": "",
+      "error": "Timeout"
+    },
+    {
+      "script": "skills/auto-updater/scripts/auto-update.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "============================================================\n\ud83d\udd04 Starting daily auto-update\n============================================================\n\n============================================================\n\ud83d\udd04 Daily Auto-Update Complete\n============================================================\n\n**Clawdbot**: \u274c Update failed: [clawdbot] Failed to start CLI: Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/ubuntu/.npm-global/lib/node_modules/clawdbot/node_modules/@buape/carbon/dist/",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/context7/scripts/context7.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: context7.py [-h] {search,context,list} ...\n\nContext7 API Client - Fetch library documentation\n\npositional arguments:\n  {search,context,list}\n                        Command to run\n    search              Search for libraries\n    context             Fetch documentation context\n    list                List popular libraries\n\noptions:\n  -h, --help            show this help message and exit\n\nExamples:\n  context7.py search \"next.js\"\n  context7.py context \"/vercel/next.js\" \"app router middlewar",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/firecrawl/scripts/firecrawl.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: firecrawl.py [-h] {scrape,crawl,extract} ...\n\nFirecrawl Web Scraper\n\npositional arguments:\n  {scrape,crawl,extract}\n                        Commands\n    scrape              Scrape a single URL\n    crawl               Crawl an entire domain\n    extract             Extract specific data\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/google-sheets/scripts/get_auth_url.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "============================================================\n\ud83d\udd10 Google Sheets OAuth Setup\n============================================================\n\n1. Open this URL in your browser:\n\nhttps://accounts.google.com/o/oauth2/auth?response_type=code&client_id=90607396646-pejoq6cl27355i8t2ihhiincfr1ieumf.apps.googleusercontent.com&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/spreadsheets%20https://www.googleapis.com/auth/drive.readonly&prompt=consent&access_type=offli",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/google-sheets/scripts/sheets.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: sheets.py [-h] [--sheet-id SHEET_ID] [--cell CELL] [--value VALUE]\n                 [--topic TOPIC] [--category CATEGORY] [--notes NOTES]\n                 [--data DATA] [--title TITLE]\n                 {read,write,append,log,list,create}\n\nGoogle Sheets Integration\n\npositional arguments:\n  {read,write,append,log,list,create}\n\noptions:\n  -h, --help            show this help message and exit\n  --sheet-id SHEET_ID, -s SHEET_ID\n                        Google Sheet ID (not needed for 'create')\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/humanizer/scripts/humanize.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: humanize.py <text> [--tone casual|professional|enthusiastic|blunt]\n\nTransform AI-generated text into natural human-sounding prose.\n\nOptions:\n  --tone casual|professional|enthusiastic|blunt  Set the tone (default: casual)\n\nExamples:\n  humanize.py \"Furthermore, it is important to note that...\"\n  humanize.py \"We are pleased to announce...\" --tone enthusiastic\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/knowledge-graph/scripts/check_graph.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/knowledge-graph/scripts/check_graph.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/knowledge-graph/scripts/graph.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: graph.py <command> [args]\nCommands: process, show, find, related, stats, export\n\nExamples:\n  graph.py process 'Extract entities from this text'\n  graph.py show Python\n  graph.py stats\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/knowledge-graph/scripts/graph.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Total nodes: 12\nTotal edges: 14\nBy type:\n  person: 2\n  technology: 6\n  concept: 1\n  project: 3\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/linkedin-monitor/scripts/connection_tracker.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: connection_tracker.py <command> [args]\n\nCommands:\n  add <name> [title] [company] [notes]  - Add connection\n  update <name> <status>                - Update status (pending/connected/ignored)\n  suggest                               - Show follow-up suggestions\n  list [status]                         - List all connections\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/linkedin-monitor/scripts/email_parser.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: email_parser.py [email_text]\n\nParses forwarded LinkedIn notification emails.\nIf no email_text provided, reads from stdin.\n\nExamples:\n  email_parser.py \"John wants to connect with you...\"\n  cat email.txt | email_parser.py\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/linkedin-monitor/scripts/reminder_scheduler.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: reminder_scheduler.py <command> [days]\n\nCommands:\n  schedule [days]  - Schedule reminders (default: every 3 days)\n  remove           - Remove all LinkedIn reminders\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/linkedin-monitor/scripts/weekly_digest.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "\ud83d\udcca LINKEDIN WEEKLY DIGEST\n========================================\n\ud83d\udcc5 Week of 2026-02-03\n\n\ud83d\udcc8 ACTIVITY SUMMARY\n   \ud83d\udc40 Profile Views: 0\n   \ud83d\udc4b Connection Requests: 1\n   \u2705 Connections Accepted: 0\n   \ud83d\udcac Messages: 0\n   \u23f3 Pending Connections: 1\n\n\ud83c\udfaf PENDING FOLLOW-UPS\n   \u2022 John Doe @ You On Linkedin\n\n\ud83d\udca1 SUGGESTED ACTIONS\n   1. Review and accept/reject pending connections\n   2. Respond to any messages\n   3. Post something this week (article, update, or insight)\n   4. Engage with 3-5 posts from your network\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/linkedin-monitor/scripts/weekly_digest.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "\ud83d\udcca LINKEDIN WEEKLY DIGEST\n========================================\n\ud83d\udcc5 Week of 2026-02-03\n\n\ud83d\udcc8 ACTIVITY SUMMARY\n   \ud83d\udc40 Profile Views: 0\n   \ud83d\udc4b Connection Requests: 1\n   \u2705 Connections Accepted: 0\n   \ud83d\udcac Messages: 0\n   \u23f3 Pending Connections: 1\n\n\ud83c\udfaf PENDING FOLLOW-UPS\n   \u2022 John Doe @ You On Linkedin\n\n\ud83d\udca1 SUGGESTED ACTIONS\n   1. Review and accept/reject pending connections\n   2. Respond to any messages\n   3. Post something this week (article, update, or insight)\n   4. Engage with 3-5 posts from your network\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/morning-brief/scripts/generate_brief.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "\n\ud83c\udf05 **Good Morning, Rajesh!** \ud83d\ude80\n\ud83d\udcc5 Tuesday, February 03, 2026\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83c\udf24\ufe0f **Weather in Hyderabad**\nHaze +26\u00b0C 48% \u219013km/h\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udccb **Your Tasks Today**\nNo urgent tasks for today\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83e\udd16 **What I Can Do For You Today**\n\ud83e\udd16 Review and optimize your ComplySec code\n\ud83d\udcca Check CommentLikeMe user analytics\n\ud83d\udcdd Draft LinkedIn post about recent progress\n\ud83d\udd27 Update documentation for Universal Read API\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/morning-brief/scripts/generate_brief.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "\n\ud83c\udf05 **Good Morning, Rajesh!** \ud83d\ude80\n\ud83d\udcc5 Tuesday, February 03, 2026\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83c\udf24\ufe0f **Weather in Hyderabad**\nHaze +26\u00b0C 48% \u219013km/h\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udccb **Your Tasks Today**\nNo urgent tasks for today\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83e\udd16 **What I Can Do For You Today**\n\ud83e\udd16 Review and optimize your ComplySec code\n\ud83d\udcca Check CommentLikeMe user analytics\n\ud83d\udcdd Draft LinkedIn post about recent progress\n\ud83d\udd27 Update documentation for Universal Read API\n\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/nano-banana-pro/scripts/generate_image.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: generate_image.py [-h] --prompt PROMPT --filename FILENAME\n                         [--input-image INPUT_IMAGE] [--resolution {1K,2K,4K}]\n                         [--api-key API_KEY]\n\nGenerate images using Nano Banana Pro (Gemini 3 Pro Image)\n\noptions:\n  -h, --help            show this help message and exit\n  --prompt PROMPT, -p PROMPT\n                        Image description/prompt\n  --filename FILENAME, -f FILENAME\n                        Output filename (e.g., sunset-mountains.png)\n  ",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/night-shift-worker/scripts/night_shift.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "[2026-02-03T07:50:43.407102] ============================================================\n[2026-02-03T07:50:43.407922] \ud83c\udf19 Starting Night Shift Work\n[2026-02-03T07:50:43.407976] ============================================================\n[2026-02-03T07:50:43.838628] === Working on complysec ===\n[2026-02-03T07:50:43.838786] Repository not found at /home/ubuntu/repos/complysec\n[2026-02-03T07:50:43.838806] === Working on commentlikeme ===\n[2026-02-03T07:50:43.838837] Repository not found at /home/ub",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/night-shift-worker/scripts/night_shift.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "[2026-02-03T07:50:43.872134] ============================================================\n[2026-02-03T07:50:43.872231] \ud83c\udf19 Starting Night Shift Work\n[2026-02-03T07:50:43.872249] ============================================================\n[2026-02-03T07:50:44.284444] === Working on complysec ===\n[2026-02-03T07:50:44.284619] Repository not found at /home/ubuntu/repos/complysec\n[2026-02-03T07:50:44.284640] === Working on commentlikeme ===\n[2026-02-03T07:50:44.284666] Repository not found at /home/ub",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/personal-greeting/scripts/greeting.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Unknown command: --help\nUsage: greeting.py [morning|night|weekend|auto|time]\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/personal-greeting/scripts/greeting.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "\ud83c\udf05 Good morning, early riser!\n\nNo activity data for today yet.\n\n\ud83d\udccb No urgent tasks for today. Perfect time to plan!\n\n\ud83d\udca1 Action creates clarity.\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/self-improving/scripts/check_lessons.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/self-improving/scripts/check_lessons.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/self-improving/scripts/learner.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: learner.py <command> [args]\nCommands: add-lesson, add-error, add-feedback, search, tool, errors, suggest\n\nExamples:\n  learner.py search 'Python error handling'\n  learner.py tool web_search\n  learner.py errors\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/self-improving/scripts/learner.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "#4 [ERROR] Error: Failed to set 10-minute reminder\n  Context: ERROR: Failed to set 10-minute reminder\nROOT_CAUSE: Message tool delay parameter sent immediately instead of scheduling; cron tool schema too complex\nSOLUTION: Use external timer or background process\n  Tool: message/cron\n  Tags: error, message/cron, test, resolved\n  Learned: 2026-01-29\n\n#3 [INSIGHT] Always check npm package existence before attempting install\n  Tool: npm\n  Tags: \n  Learned: 2026-01-28\n\n#2 [FEEDBACK] Using timeout on ",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/steve-diagnostics/scripts/test-tools.py",
+      "success": false,
+      "exit_code": null,
+      "stdout": "",
+      "stderr": "",
+      "error": "Timeout"
+    },
+    {
+      "script": "skills/sysadmin-toolbox/scripts/safe_npm_install.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: safe_npm_install.py [-h] [--timeout TIMEOUT] [--cwd CWD]\n\nSafe npm install with timeout\n\noptions:\n  -h, --help         show this help message and exit\n  --timeout TIMEOUT  Timeout in seconds\n  --cwd CWD          Working directory\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/sysadmin-toolbox/scripts/toolbox.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: toolbox.py [-h] [--list] [--show] [category] [command]\n\nSysadmin Toolbox\n\npositional arguments:\n  category    Command category (logs, processes, network, security, aws)\n  command     Command name\n\noptions:\n  -h, --help  show this help message and exit\n  --list, -l  List all commands\n  --show, -s  Show command without running\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/task-master/scripts/check_reminders.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/task-master/scripts/check_reminders.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/task-master/scripts/check_reminders.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/task-master/scripts/task_manager.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "Usage: task_manager.py <command> [args]\n\nCommands:\n  add <desc> [priority] [deadline] [context]  - Add a new task\n  list [status] [sort_by]                     - List tasks (default: open, by priority)\n  complete <task_id>                          - Mark task as complete\n  delete <task_id>                            - Delete a task\n  upcoming [hours]                            - Show upcoming deadlines\n\nExamples:\n  task_manager.py add \"Fix bug\" high 2024-12-31 \"urgent\"\n  task_manager.py list all",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/task-master/scripts/task_manager.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "No tasks found.\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/tavily-search/scripts/tavily.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: tavily.py [-h] {search,research,news} ...\n\nTavily AI Search\n\npositional arguments:\n  {search,research,news}\n                        Commands\n    search              Quick web search\n    research            Deep research with multiple sources\n    news                Latest news on topic\n\noptions:\n  -h, --help            show this help message and exit\n\nExamples:\n  tavily.py search \"Python async best practices\"\n  tavily.py research \"microservices architecture patterns\"\n  tavily.py news \"AI ",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "script": "skills/ui-formatter/scripts/format.py",
+      "success": true,
+      "exit_code": 0,
+      "stdout": "usage: format.py [-h] [--file FILE] [--text TEXT] [--no-cta] [--width WIDTH]\n\nFormat text for Telegram\n\noptions:\n  -h, --help            show this help message and exit\n  --file FILE, -f FILE  Input file\n  --text TEXT, -t TEXT  Input text\n  --no-cta              Skip CTA\n  --width WIDTH, -w WIDTH\n                        Max line width\n",
+      "stderr": "",
+      "error": null
+    }
+  ]
+}

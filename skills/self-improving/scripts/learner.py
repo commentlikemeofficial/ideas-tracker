@@ -188,10 +188,14 @@ def suggest_approach(task_description: str) -> str:
     return "\n".join(output)
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("--help", "-h"):
         print("Usage: learner.py <command> [args]")
         print("Commands: add-lesson, add-error, add-feedback, search, tool, errors, suggest")
-        sys.exit(1)
+        print("\nExamples:")
+        print("  learner.py search 'Python error handling'")
+        print("  learner.py tool web_search")
+        print("  learner.py errors")
+        sys.exit(0 if sys.argv[1] in ("--help", "-h") else 1)
     
     cmd = sys.argv[1]
     

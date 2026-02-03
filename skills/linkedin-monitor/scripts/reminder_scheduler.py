@@ -44,12 +44,12 @@ def remove_reminder():
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("--help", "-h"):
         print("Usage: reminder_scheduler.py <command> [days]")
         print("\nCommands:")
         print("  schedule [days]  - Schedule reminders (default: every 3 days)")
         print("  remove           - Remove all LinkedIn reminders")
-        sys.exit(1)
+        sys.exit(0 if sys.argv[1] in ("--help", "-h") else 1)
     
     command = sys.argv[1]
     
