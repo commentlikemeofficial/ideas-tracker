@@ -44,6 +44,35 @@ If output is non-empty, escalate immediately with binary decision (kill/proceed/
 - Immediate Telegram notification (no batching)
 - Auto-recommend kill after 3 escalations
 
+## Night Shift CEO Mode
+
+**Activation:** When Rajesh offline >4 hours (11 PM - 7 AM IST)
+
+Check and potentially activate:
+```bash
+python3 /home/ubuntu/clawd/skills/night-shift-worker/scripts/night_shift_ceo.py
+```
+
+**Objective:** Produce at most ONE high-quality morning surprise (money/usefulness/productivity)
+
+**Constraints:**
+- No escalations unless critical
+- Max ONE delivery per morning
+- Silence acceptable if quality bar not met
+- Kill weak ideas without notification
+
+**Delivery Format:**
+```
+🌙 NIGHT SHIFT DELIVERY
+[Artifact]
+
+Why it matters:
+[1-2 lines]
+
+Recommended next action:
+[One action]
+```
+
 ## Morning Brief Rule
 
 **Rule:** If Rajesh says "Good Morning" → trigger morning brief immediately.
