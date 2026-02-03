@@ -158,22 +158,25 @@ export function JwtTool() {
               
               {/* Show claim explanations */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                {decoded.payload.exp && (
+                {typeof decoded.payload.exp === 'number' && (
                   <div className="p-2 bg-muted rounded">
                     <span className="font-medium">exp (Expires):</span>
-                    <br />{formatDate(decoded.payload.exp as number).toString()}
+                    <br />
+                    {formatDate(decoded.payload.exp)}
                   </div>
                 )}
-                {decoded.payload.iat && (
+                {typeof decoded.payload.iat === 'number' && (
                   <div className="p-2 bg-muted rounded">
                     <span className="font-medium">iat (Issued At):</span>
-                    <br />{formatDate(decoded.payload.iat as number).toString()}
+                    <br />
+                    {formatDate(decoded.payload.iat)}
                   </div>
                 )}
-                {decoded.payload.nbf && (
+                {typeof decoded.payload.nbf === 'number' && (
                   <div className="p-2 bg-muted rounded">
                     <span className="font-medium">nbf (Not Before):</span>
-                    <br />{formatDate(decoded.payload.nbf as number).toString()}
+                    <br />
+                    {formatDate(decoded.payload.nbf)}
                   </div>
                 )}
               </div>
