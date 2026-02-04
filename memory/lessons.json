@@ -61,6 +61,48 @@
       "created_at": "2026-01-29T03:41:40.524592",
       "accessed_count": 4,
       "last_accessed": "2026-02-03T10:24:20.487531"
+    },
+    {
+      "id": 5,
+      "lesson": "Mobile-first Telegram formatting: no wide tables, bullet lists only, max 1 emoji per section, short scannable lines",
+      "category": "insight",
+      "context": "",
+      "tool": "formatting",
+      "outcome": "success",
+      "tags": [
+        "telegram"
+      ],
+      "created_at": "2026-02-04T03:43:02.894567",
+      "accessed_count": 1,
+      "last_accessed": "2026-02-04T03:43:06.837173"
+    },
+    {
+      "id": 6,
+      "lesson": "Full autonomous mode: execute first, report after, only interrupt for security/data loss/money",
+      "category": "insight",
+      "context": "",
+      "tool": "autonomy",
+      "outcome": "success",
+      "tags": [
+        "workflow"
+      ],
+      "created_at": "2026-02-04T03:43:02.934957",
+      "accessed_count": 0,
+      "last_accessed": null
+    },
+    {
+      "id": 7,
+      "lesson": "Install useful skills immediately when discovered, don't wait for explicit approval",
+      "category": "insight",
+      "context": "",
+      "tool": "proactivity",
+      "outcome": "success",
+      "tags": [
+        "skills"
+      ],
+      "created_at": "2026-02-04T03:43:02.975149",
+      "accessed_count": 0,
+      "last_accessed": null
     }
   ],
   "patterns": {
@@ -72,9 +114,12 @@
       2
     ],
     "insight": [
-      3
+      3,
+      5,
+      6,
+      7
     ]
   },
   "tool_effectiveness": {},
-  "next_id": 5
+  "next_id": 8
 }
