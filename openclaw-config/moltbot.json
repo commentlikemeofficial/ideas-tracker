@@ -1,0 +1,15 @@
+{
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "clawd",
+    "headless": true,
+    "noSandbox": true,
+    "executablePath": "/usr/bin/google-chrome",
+    "profiles": {
+      "clawd": {
+        "cdpPort": 18800,
+        "color": "#FF4500"
+      }
+    }
+  }
+}

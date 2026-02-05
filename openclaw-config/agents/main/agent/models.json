@@ -1,0 +1,132 @@
+{
+  "providers": {
+    "kimi-code": {
+      "baseUrl": "https://api.kimi.com/coding/v1",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "kimi-for-coding",
+          "name": "Kimi For Coding",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 262144,
+          "maxTokens": 32768,
+          "headers": {
+            "User-Agent": "KimiCLI/0.77"
+          },
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        },
+        {
+          "id": "kimi-k2.5",
+          "name": "Kimi K2.5",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 262144,
+          "maxTokens": 32768,
+          "headers": {
+            "User-Agent": "KimiCLI/0.77"
+          },
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        },
+        {
+          "id": "kimi-k2.5-thinking",
+          "name": "Kimi K2.5 Thinking",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 262144,
+          "maxTokens": 32768,
+          "headers": {
+            "User-Agent": "KimiCLI/0.77"
+          },
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        }
+      ],
+      "apiKey": "sk-kimi-FC6qPEfk1IBbmh84tf1dCthfuwWQZlBlAkJp1EQABLcGCwnwuuRchzVvsfj4GLAE"
+    },
+    "openrouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "tngtech/deepseek-r1t2-chimera:free",
+          "name": "DeepSeek R1T2 Chimera",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 128000,
+          "maxTokens": 8192
+        },
+        {
+          "id": "z-ai/glm-4.5-air:free",
+          "name": "GLM 4.5 Air",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 128000,
+          "maxTokens": 4096
+        },
+        {
+          "id": "z-ai/glm-4.7-flash:free",
+          "name": "GLM 4.7 Flash",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 128000,
+          "maxTokens": 4096
+        }
+      ],
+      "apiKey": "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"
+    }
+  }
+}

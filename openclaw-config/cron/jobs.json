@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "6c523a27-1a1b-4256-bc8e-cc9ba1392b64",
+      "agentId": "main",
+      "name": "ContentClaw Research",
+      "enabled": true,
+      "createdAtMs": 1770264891292,
+      "updatedAtMs": 1770273000001,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 */12 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Run ContentClaw autonomous mode: Research AI/SaaS YouTube trends, pick top video, generate LinkedIn+X+Reddit posts, save to daily-packages.",
+        "model": "kimi-code/kimi-k2.5",
+        "timeoutSeconds": 300
+      },
+      "state": {
+        "nextRunAtMs": 1770316200000,
+        "lastRunAtMs": 1770273000001,
+        "lastStatus": "ok",
+        "lastDurationMs": 101369
+      }
+    },
+    {
+      "id": "9037c7c0-8a30-491b-b804-18bed121b9a4",
+      "agentId": "main",
+      "name": "Scout Research",
+      "enabled": true,
+      "createdAtMs": 1770264891306,
+      "updatedAtMs": 1770294600001,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 */6 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Run Scout research cycle: Scrape Reddit r/SaaS, r/Entrepreneur for AI/SaaS opportunities. Analyze with scoring matrix. Generate opportunity report.",
+        "model": "kimi-code/kimi-k2.5",
+        "timeoutSeconds": 300
+      },
+      "state": {
+        "nextRunAtMs": 1770316200000,
+        "lastRunAtMs": 1770294600001,
+        "lastStatus": "ok",
+        "lastDurationMs": 20671
+      }
+    },
+    {
+      "id": "61b8f776-3fde-4f8b-b34c-7818522b8a2a",
+      "agentId": "main",
+      "name": "Social Media Morning Prep",
+      "enabled": true,
+      "createdAtMs": 1770264891319,
+      "updatedAtMs": 1770264891319,
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 9 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Generate daily content package for LinkedIn (11 AM), X/Twitter (4 PM), Reddit (7 PM). Generate images. Save to daily-packages.",
+        "model": "kimi-code/kimi-k2.5",
+        "timeoutSeconds": 300
+      },
+      "state": {
+        "nextRunAtMs": 1770349500000
+      }
+    },
+    {
+      "id": "78a8636d-1eb4-4e77-9c91-41f8b1dd7b8a",
+      "agentId": "main",
+      "name": "LinkedIn Reminder",
+      "enabled": true,
+      "createdAtMs": 1770264902113,
+      "updatedAtMs": 1770269100000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "55 10 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "REMINDER: LinkedIn post ready! Check /home/ubuntu/clawd/agents/social-media-manager/daily-packages/ for today's content. Post at 11 AM IST."
+      },
+      "state": {
+        "nextRunAtMs": 1770355500000,
+        "lastRunAtMs": 1770269100001,
+        "lastStatus": "ok",
+        "lastDurationMs": 17
+      }
+    },
+    {
+      "id": "709ce7a6-f9dc-44fb-84c7-ea44e8d70473",
+      "agentId": "main",
+      "name": "Twitter Reminder",
+      "enabled": true,
+      "createdAtMs": 1770264902132,
+      "updatedAtMs": 1770287100000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "55 15 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "REMINDER: X/Twitter post ready! Check daily-packages for thread content. Post at 4 PM IST."
+      },
+      "state": {
+        "nextRunAtMs": 1770373500000,
+        "lastRunAtMs": 1770287100000,
+        "lastStatus": "ok",
+        "lastDurationMs": 19
+      }
+    },
+    {
+      "id": "66c1c358-40b2-4e4d-9b9b-deb64688943e",
+      "agentId": "main",
+      "name": "Reddit Reminder",
+      "enabled": true,
+      "createdAtMs": 1770264902177,
+      "updatedAtMs": 1770297900001,
+      "schedule": {
+        "kind": "cron",
+        "expr": "55 18 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "REMINDER: Reddit post ready! Check daily-packages for content. Post at 7 PM IST."
+      },
+      "state": {
+        "nextRunAtMs": 1770384300000,
+        "lastRunAtMs": 1770297900001,
+        "lastStatus": "ok",
+        "lastDurationMs": 24
+      }
+    },
+    {
+      "id": "0ca2fbaf-37e2-472d-b42c-d19effbf538a",
+      "agentId": "main",
+      "name": "Daily Job Search",
+      "enabled": true,
+      "createdAtMs": 1770281127923,
+      "updatedAtMs": 1770281592362,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 14 * * *",
+        "tz": "Asia/Kolkata"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Daily Job Search for Rajesh: Use Tavily search to find AI Engineer, Full Stack Developer, and Fractional Engineer roles posted in last 24h. Search queries: 'AI engineer remote jobs site:arc.dev OR site:wellfound.com', 'full stack developer contract remote', 'fractional AI engineer jobs', 'Next.js developer remote part time', 'YC jobs AI engineer', 'Y Combinator jobs remote'. Also check RemoteOK, We Work Remotely for fresh postings. Compile list with: company, role, type (FT/PT/Contract/Freelance), location (remote/hybrid), salary if listed, link, posted time. Return formatted list with total count.",
+        "model": "kimi-code/kimi-k2.5",
+        "timeoutSeconds": 300
+      },
+      "state": {
+        "nextRunAtMs": 1770366600000
+      }
+    }
+  ]
+}

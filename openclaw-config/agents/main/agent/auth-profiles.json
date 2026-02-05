@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "profiles": {
+    "google:default": {
+      "type": "api_key",
+      "provider": "google",
+      "key": "AIzaSyBv8v6V7bLjTvnIO-MYIjm22d1xGTDwQ1o"
+    },
+    "openrouter:default": {
+      "type": "api_key",
+      "provider": "openrouter",
+      "key": "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"
+    },
+    "kimi-code:default": {
+      "type": "api_key",
+      "provider": "kimi-code",
+      "key": "sk-kimi-V3rB9OIdzZ82xE6lb1LgRqd3EJtFgXvixTN3GYhEp1d6b4RBEnmGdp0B7VFWXNH7"
+    },
+    "telegram:bot": {
+      "type": "api_key",
+      "provider": "telegram",
+      "key": "8315267291:AAHnAexYdDZa8_U16UiUqlJs3Ces5WwRHK4"
+    }
+  },
+  "lastGood": {
+    "kimi-code": "kimi-code:default",
+    "google": "google:default",
+    "openrouter": "openrouter:default"
+  },
+  "usageStats": {
+    "kimi-code:default": {
+      "lastUsed": 1769924039707,
+      "errorCount": 3,
+      "lastFailureAt": 1770101911102,
+      "failureCounts": {
+        "rate_limit": 3
+      },
+      "cooldownUntil": 1770103411102
+    },
+    "google:default": {
+      "lastUsed": 1769754622929,
+      "errorCount": 0
+    },
+    "openrouter:default": {
+      "lastUsed": 1769684547819,
+      "errorCount": 0
+    }
+  }
+}

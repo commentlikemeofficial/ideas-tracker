@@ -1,0 +1,281 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.2-3",
+    "lastTouchedAt": "2026-02-05T04:07:05.963Z"
+  },
+  "env": {
+    "KIMI_API_KEY": "sk-kimi-FC6qPEfk1IBbmh84tf1dCthfuwWQZlBlAkJp1EQABLcGCwnwuuRchzVvsfj4GLAE"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-05T04:07:05.953Z",
+    "lastRunVersion": "2026.2.2-3",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "google:default": {
+        "provider": "google",
+        "mode": "api_key"
+      },
+      "openrouter:default": {
+        "provider": "openrouter",
+        "mode": "api_key"
+      }
+    },
+    "order": {
+      "google": [
+        "google:default"
+      ],
+      "openrouter": [
+        "openrouter:default"
+      ],
+      "kimi-code": []
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "kimi-code": {
+        "baseUrl": "https://api.kimi.com/coding/v1",
+        "apiKey": "sk-kimi-FC6qPEfk1IBbmh84tf1dCthfuwWQZlBlAkJp1EQABLcGCwnwuuRchzVvsfj4GLAE",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-for-coding",
+            "name": "Kimi For Coding",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32768,
+            "headers": {
+              "User-Agent": "KimiCLI/0.77"
+            },
+            "compat": {
+              "supportsDeveloperRole": false
+            }
+          },
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32768,
+            "headers": {
+              "User-Agent": "KimiCLI/0.77"
+            },
+            "compat": {
+              "supportsDeveloperRole": false
+            }
+          },
+          {
+            "id": "kimi-k2.5-thinking",
+            "name": "Kimi K2.5 Thinking",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32768,
+            "headers": {
+              "User-Agent": "KimiCLI/0.77"
+            },
+            "compat": {
+              "supportsDeveloperRole": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "kimi-code/kimi-k2.5",
+        "fallbacks": [
+          "kimi-code/kimi-for-coding",
+          "google/gemini-1.5-flash",
+          "openrouter/stepfun/step-3.5-flash:free"
+        ]
+      },
+      "models": {
+        "kimi-code/kimi-for-coding": {
+          "alias": "Kimi Code"
+        },
+        "kimi-code/kimi-k2.5": {
+          "alias": "kimi-k25"
+        },
+        "kimi-code/kimi-k2.5-thinking": {
+          "alias": "kimi-k25-thinking"
+        },
+        "google/gemini-2.0-flash-exp": {},
+        "openrouter/anthropic/claude-3.5-sonnet": {}
+      },
+      "workspace": "/home/ubuntu/clawd",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
+  },
+  "session": {
+    "reset": {
+      "mode": "daily",
+      "atHour": 12
+    }
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "boot-md": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "8315267291:AAHnAexYdDZa8_U16UiUqlJs3Ces5WwRHK4",
+      "groupPolicy": "allowlist",
+      "streamMode": "partial"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "7105a84393f043360ded9bbacd4b3c55b61b52094ee9fb23"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "load": {
+      "extraDirs": [
+        "/home/ubuntu/clawd/skills"
+      ]
+    },
+    "install": {
+      "nodeManager": "bun"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  },
+  "cron": {
+    "enabled": true,
+    "jobs": [
+      {
+        "name": "ContentClaw Research",
+        "schedule": "0 */12 * * *",
+        "sessionTarget": "isolated",
+        "payload": {
+          "kind": "agentTurn",
+          "message": "Run ContentClaw autonomous mode: Research AI/SaaS YouTube trends, pick top video, generate LinkedIn+X+Reddit posts, save to daily-packages.",
+          "model": "kimi-code/kimi-k2.5",
+          "timeoutSeconds": 300
+        }
+      },
+      {
+        "name": "Scout Research",
+        "schedule": "0 */6 * * *",
+        "sessionTarget": "isolated",
+        "payload": {
+          "kind": "agentTurn",
+          "message": "Run Scout research cycle: Scrape Reddit r/SaaS, r/Entrepreneur for AI/SaaS opportunities. Analyze with scoring matrix. Generate opportunity report.",
+          "model": "kimi-code/kimi-k2.5",
+          "timeoutSeconds": 300
+        }
+      },
+      {
+        "name": "Social Media Morning Prep",
+        "schedule": "15 9 * * *",
+        "sessionTarget": "isolated",
+        "payload": {
+          "kind": "agentTurn",
+          "message": "Generate daily content package for LinkedIn (11 AM), X/Twitter (4 PM), Reddit (7 PM). Generate images. Save to daily-packages.",
+          "model": "kimi-code/kimi-k2.5",
+          "timeoutSeconds": 300
+        }
+      },
+      {
+        "name": "LinkedIn Reminder",
+        "schedule": "55 10 * * *",
+        "sessionTarget": "main",
+        "payload": {
+          "kind": "systemEvent",
+          "text": "REMINDER: LinkedIn post ready! Check /home/ubuntu/clawd/agents/social-media-manager/daily-packages/ for today's content. Post at 11 AM IST."
+        }
+      },
+      {
+        "name": "Twitter Reminder",
+        "schedule": "55 15 * * *",
+        "sessionTarget": "main",
+        "payload": {
+          "kind": "systemEvent",
+          "text": "REMINDER: X/Twitter post ready! Check daily-packages for thread content. Post at 4 PM IST."
+        }
+      },
+      {
+        "name": "Reddit Reminder",
+        "schedule": "55 18 * * *",
+        "sessionTarget": "main",
+        "payload": {
+          "kind": "systemEvent",
+          "text": "REMINDER: Reddit post ready! Check daily-packages for content. Post at 7 PM IST."
+        }
+      }
+    ]
+  }
+}
