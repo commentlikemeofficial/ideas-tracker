@@ -24,6 +24,29 @@ git clone https://github.com/commentlikemeofficial/ideas-tracker.git clawd
 cd clawd
 ```
 
+### Option A: Quick Restore (Full Backup Included)
+
+This repo includes complete OpenClaw configuration:
+
+```bash
+# Restore OpenClaw config to your home directory
+mkdir -p ~/.openclaw
+cp -r openclaw-config/* ~/.openclaw/
+
+# Restore ByteRover config
+mkdir -p ~/.brv
+cp -r .brv/* ~/.brv/
+
+# Create symlink (Clawdbot expects this)
+ln -sf ~/.openclaw ~/.clawdbot
+```
+
+Done! Skip to Step 9.
+
+### Option B: Fresh Setup (Manual)
+
+Continue with steps 3-8 below for manual configuration.
+
 ---
 
 ## 3. Install All Skills
