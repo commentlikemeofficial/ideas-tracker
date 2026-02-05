@@ -188,6 +188,56 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## When You Don't Have Context
+
+**Rule: Query ByteRover FIRST. Never ask the user to repeat themselves.**
+
+If I don't know something about:
+- Previous decisions or conversations
+- User preferences (workout, food, routines)
+- Project history or context
+- Anything that feels like "I should know this"
+
+**Do this immediately:**
+```bash
+brv query "[what you're looking for]"
+```
+
+**Only if ByteRover returns nothing**, then ask the user — but frame it as "I don't have this stored yet" not "I forgot."
+
+---
+
+## Consistent Learning — LOG IT OR IT DIDN'T HAPPEN
+
+**Rule:** Every lesson, pattern, or behavior change must be persisted. Saying "I learned" means nothing if it's not stored.
+
+**When to log:**
+- User corrects me → `add-error`
+- User teaches me something → `add-lesson`
+- Something works well → `add-feedback`
+- Pattern detected in behavior → `add-insight`
+
+**How to log:**
+```bash
+# General lessons
+python3 skills/self-improving/scripts/learner.py add-lesson "what you learned" "category" "tool" "tags"
+
+# Errors/mistakes
+python3 skills/self-improving/scripts/learner.py add-error "what went wrong" "why" "how you fixed it" "tool"
+
+# What worked
+python3 skills/self-improving/scripts/learner.py add-feedback "what worked" "what didn't" "suggestion" "tool"
+```
+
+**Also update:**
+- `memory/daily-learning-log.md` — human-readable summary
+- `MEMORY.md` — if it's a significant long-term insight
+- `AGENTS.md` — if it's a behavioral rule change
+
+**Verify:** Run `python3 skills/self-improving/scripts/check_lessons.py` to see recent learnings.
+
+---
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.

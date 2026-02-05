@@ -103,6 +103,37 @@
       "created_at": "2026-02-04T03:43:02.975149",
       "accessed_count": 0,
       "last_accessed": null
+    },
+    {
+      "id": 8,
+      "lesson": "Query ByteRover FIRST before asking user to repeat themselves",
+      "category": "insight",
+      "context": "",
+      "tool": "byterover",
+      "outcome": "success",
+      "tags": [
+        "memory",
+        "pattern",
+        "context"
+      ],
+      "created_at": "2026-02-05T13:58:26.766846",
+      "accessed_count": 0,
+      "last_accessed": null
+    },
+    {
+      "id": 9,
+      "lesson": "Workout routine: 6-day bro split (Chest/Tri, Back/Bi, Shoulders/Legs)",
+      "category": "preference",
+      "context": "",
+      "tool": "memory",
+      "outcome": "success",
+      "tags": [
+        "fitness",
+        "user-profile"
+      ],
+      "created_at": "2026-02-05T13:58:26.804810",
+      "accessed_count": 0,
+      "last_accessed": null
     }
   ],
   "patterns": {
@@ -117,9 +148,13 @@
       3,
       5,
       6,
-      7
+      7,
+      8
+    ],
+    "preference": [
+      9
     ]
   },
   "tool_effectiveness": {},
-  "next_id": 8
+  "next_id": 10
 }

@@ -20,6 +20,17 @@ python3 /home/ubuntu/clawd/skills/self-improving/scripts/check_lessons.py
 
 If output is non-empty, share the lessons learned.
 
+**CRITICAL:** Every session must log learnings, not just talk about them:
+```bash
+# When user teaches/corrects you, LOG IT:
+python3 skills/self-improving/scripts/learner.py add-lesson "what you learned" "insight" "tool" "tags"
+
+# Verify recent learnings:
+cat memory/daily-learning-log.md
+```
+
+**Rule:** Saying "I learned" without persisting to lessons.json = didn't happen.
+
 ## Knowledge Graph Checks
 
 Surface recent entities and strong connections:

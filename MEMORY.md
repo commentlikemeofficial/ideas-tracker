@@ -1,6 +1,6 @@
 # MEMORY.md — Curated Long-Term Memory
 
-Last updated: 2026-02-04
+Last updated: 2026-02-05
 
 —
 
@@ -78,6 +78,12 @@ Last updated: 2026-02-04
 • Don't wait for explicit approval
 • Source: Reddit CLI incident 2026-02-04
 
+**#8 — LOG IT OR IT DIDN'T HAPPEN**
+• Every lesson must be persisted via `learner.py`
+• Saying "I learned" without logging = didn't happen
+• Update AGENTS.md, MEMORY.md, AND lessons.json
+• Source: User called me out 2026-02-05
+
 —
 
 ## Active Skill Systems (90-100% Utilization Mandate)
@@ -92,9 +98,19 @@ Last updated: 2026-02-04
 • Trend research agent operational
 
 **B) Knowledge System — ACTIVE**
-• ByteRover: Curating all context, skill usage mandates stored
-• Knowledge-graph: Entity extraction from all conversations
-• Location: /home/ubuntu/clawd/skills/knowledge-graph/
+
+***ByteRover (Primary Knowledge Store)***
+• Location: `.brv/canonical-memory/`
+• Query: `brv query "question"`
+• Curate: `brv curate "context" -f file.ts`
+• Contains: User profile, agent identities, stored frameworks, decisions
+• **USE FIRST** when context is missing — never ask user to repeat
+
+***Knowledge Graph (Entity Extraction)***
+• Location: `/home/ubuntu/clawd/skills/knowledge-graph/`
+• Query: `python3 skills/knowledge-graph/scripts/check_graph.py`
+• Extracts: People, projects, technologies, relationships from conversations
+• Auto-builds connections between concepts
 
 **C) Dev Intelligence — ACTIVE**
 • context7: PROACTIVE use for all library docs (React, Next.js, Supabase, etc.)
@@ -147,11 +163,48 @@ Last updated: 2026-02-04
 
 **On reset/new session:**
 1. Read MEMORY.md (this file)
-2. Read memory/2026-02-05.md (today's full context)
-3. Check ~/.bashrc for GEMINI_API_KEY
-4. All skills remain installed and ready
+2. Read memory/YYYY-MM-DD.md (today + yesterday)
+3. **Query ByteRover:** `brv query "What is the current project context?"`
+4. **Query Knowledge Graph:** `python3 skills/knowledge-graph/scripts/check_graph.py`
+5. Check ~/.bashrc for GEMINI_API_KEY
+6. **Review learning log:** `cat memory/daily-learning-log.md`
+7. **Remember:** LOG every lesson — saying "I learned" without persisting = didn't happen
+8. All skills remain installed and ready
+
+**Quick Context Lookup (when missing info):**
+```bash
+# User preferences, routines, past decisions
+brv query "[what you need]"
+
+# Recent entities, projects, connections
+python3 skills/knowledge-graph/scripts/check_graph.py
+```
 
 ---
+
+## Personal Context (2026-02-05)
+
+***Fitness Routine***
+• **Schedule:** 6 days/week bro split
+• **Monday:** Chest + Triceps + 10 min incline treadmill (12-15 incline, 3-4 km/h)
+• **Tuesday:** Back + Biceps + cardio
+• **Wednesday:** Shoulders + Legs + cardio
+• **Thursday-Saturday:** Repeat (Chest/Tri, Back/Bi, Shoulders/Legs)
+• **Sunday:** Rest
+• **Extras:** Sometimes forearms, mixes exercises
+• **Location:** Gym-based
+
+***Disciplines (Since Jan 1, 2026)***
+• Daily gym (see routine above)
+• No junk food
+• No addictions
+
+***Lifestyle Goals***
+• PS5 Pro
+• 2-3 BHK house
+• Vehicles
+
+—
 
 ## Career & Income Context (2026-02-05)
 
@@ -175,9 +228,7 @@ Last updated: 2026-02-04
 - Stack: Next.js, TypeScript, Supabase, LLM APIs
 - Superpower: Ships 2-3x faster with AI tools (Cursor, Claude Code)
 
-**Personal Context:**
-- Disciplined routine since Jan 1, 2026: gym daily, no junk food, no addictions
-- Wants lifestyle upgrades: PS5 Pro, 2-3 BHK house, vehicles
+**Traits:**
 - Confidence fluctuating but committed to growth
 - Prefers direct, no-fluff communication
 - Response to "pick one": Chose Path B (stack jobs over job hop or pure building)
