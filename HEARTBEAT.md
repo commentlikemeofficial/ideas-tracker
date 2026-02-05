@@ -95,6 +95,39 @@ Check current time in IST. If it's around 9 AM IST and no morning brief was sent
 python3 /home/ubuntu/clawd/skills/morning-brief/scripts/generate_brief.py
 ```
 
+## Afternoon Research Report (NEW)
+
+**Time:** 3:00 PM IST (9:30 AM UTC) daily
+
+**Purpose:** Deep dive on concepts that improve Rajesh — ML, productivity workflows, business strategies, or our working relationship.
+
+**Topics to rotate:**
+- AI/ML concepts (embeddings, RAG, fine-tuning)
+- Productivity workflows (time management, automation)
+- SaaS/business strategies (pricing, growth, marketing)
+- Tool improvements (new skills, better workflows)
+
+**Execution:**
+```bash
+python3 /home/ubuntu/clawd/agents/afternoon-research/scripts/generate_report.py
+```
+
+**Output format:**
+```
+📊 AFTERNOON RESEARCH REPORT
+[Topic]
+
+Key insights:
+• [Insight 1]
+• [Insight 2]
+
+How to apply:
+[Actionable steps]
+
+Recommended next action:
+[One thing to try]
+```
+
 ## Scout Research Agent
 
 Every 6 hours (09:00, 15:00, 21:00, 03:00 IST), trigger Scout's research cycle:
