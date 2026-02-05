@@ -1,21 +1,21 @@
-import { getAllDocuments } from "@/lib/documents";
+import { allDocuments } from "@/lib/data";
 import Link from "next/link";
 import { FileText, Clock } from "lucide-react";
 
-export default async function ListPage({ 
+export default function ListPage({ 
   searchParams 
 }: { 
   searchParams: { category?: string } 
 }) {
-  const documents = await getAllDocuments();
+  const documents = allDocuments;
   const category = searchParams.category;
   
   const filteredDocs = category 
-    ? documents.filter(d => d.category === category)
+    ? documents.filter((d: any) => d.category === category)
     : documents;
 
   // Group by category
-  const byCategory = filteredDocs.reduce((acc, doc) => {
+  const byCategory = filteredDocs.reduce((acc: any, doc: any) => {
     if (!acc[doc.category]) acc[doc.category] = [];
     acc[doc.category].push(doc);
     return acc;
@@ -42,13 +42,13 @@ export default async function ListPage({
       </div>
 
       <div className="space-y-6">
-        {Object.entries(byCategory).map(([cat, docs]) => (
+        {Object.entries(byCategory).map(([cat, docs]: [string, any]) => (
           <div key={cat}>
             <h2 className="text-lg font-semibold mb-3 text-gray-300 capitalize">
               {cat.replace(/-/g, ' ')}
             </h2>
             <div className="grid gap-2">
-              {docs.map((doc) => (
+              {docs.map((doc: any) => (
                 <Link
                   key={doc.id}
                   href={`/doc/${encodeURIComponent(doc.id)}`}
@@ -63,7 +63,7 @@ export default async function ListPage({
                   </div>
                   <div className="flex items-center gap-2 text-xs text-gray-500">
                     <Clock className="w-3 h-3" />
-                    {doc.lastModified.toLocaleDateString()}
+                    {new Date(doc.lastModified).toLocaleDateString()}
                   </div>
                 </Link>
               ))}

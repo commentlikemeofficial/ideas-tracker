@@ -1,14 +1,14 @@
-import { getAllDocuments, getJournalEntries } from "@/lib/documents";
+import { allDocuments, journalEntries } from "@/lib/data";
 import { FileText, BookOpen, Calendar, Layers } from "lucide-react";
 import Link from "next/link";
 
-export default async function Home() {
-  const documents = await getAllDocuments();
-  const journalEntries = await getJournalEntries();
+export default function Home() {
+  const documents = allDocuments;
+  const journal = journalEntries;
   
-  const categories = [...new Set(documents.map(d => d.category))];
+  const categories = [...new Set(documents.map((d: any) => d.category))];
   const recentDocs = documents.slice(0, 5);
-  const recentJournals = journalEntries.slice(0, 3);
+  const recentJournals = journal.slice(0, 3);
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -36,14 +36,14 @@ export default async function Home() {
             <BookOpen className="w-5 h-5 text-amber-500" />
             <span className="text-gray-400 text-sm">Journal Entries</span>
           </div>
-          <p className="text-2xl font-bold">{journalEntries.length}</p>
+          <p className="text-2xl font-bold">{journal.length}</p>
         </div>
         <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">
           <div className="flex items-center gap-3 mb-2">
             <Calendar className="w-5 h-5 text-rose-500" />
             <span className="text-gray-400 text-sm">Last Updated</span>
           </div>
-          <p className="text-sm">{documents[0]?.lastModified.toLocaleDateString() || "N/A"}</p>
+          <p className="text-sm">{documents[0]?.lastModified ? new Date(documents[0].lastModified).toLocaleDateString() : "N/A"}</p>
         </div>
       </div>
 
@@ -52,7 +52,7 @@ export default async function Home() {
         <div>
           <h2 className="text-xl font-semibold mb-4">Recent Documents</h2>
           <div className="space-y-2">
-            {recentDocs.map((doc) => (
+            {recentDocs.map((doc: any) => (
               <Link
                 key={doc.id}
                 href={`/doc/${encodeURIComponent(doc.id)}`}
@@ -62,7 +62,7 @@ export default async function Home() {
                   <div>
                     <h3 className="font-medium text-gray-200">{doc.title}</h3>
                     <p className="text-xs text-gray-500 mt-1">
-                      {doc.category} • {doc.lastModified.toLocaleDateString()}
+                      {doc.category} • {new Date(doc.lastModified).toLocaleDateString()}
                     </p>
                   </div>
                   <FileText className="w-4 h-4 text-gray-600" />
@@ -86,7 +86,7 @@ export default async function Home() {
           <h2 className="text-xl font-semibold mb-4">Recent Journal</h2>
           <div className="space-y-2">
             {recentJournals.length > 0 ? (
-              recentJournals.map((entry) => (
+              recentJournals.map((entry: any) => (
                 <Link
                   key={entry.id}
                   href={`/doc/${encodeURIComponent(entry.id)}`}
@@ -95,7 +95,7 @@ export default async function Home() {
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium text-gray-200">{entry.title}</h3>
                     <span className="text-xs text-gray-500">
-                      {entry.lastModified.toLocaleDateString()}
+                      {new Date(entry.lastModified).toLocaleDateString()}
                     </span>
                   </div>
                   <p className="text-sm text-gray-400 mt-2 line-clamp-2">
@@ -120,7 +120,7 @@ export default async function Home() {
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Categories</h2>
         <div className="flex flex-wrap gap-2">
-          {categories.map((cat) => (
+          {categories.map((cat: any) => (
             <Link
               key={cat}
               href={`/list?category=${cat}`}

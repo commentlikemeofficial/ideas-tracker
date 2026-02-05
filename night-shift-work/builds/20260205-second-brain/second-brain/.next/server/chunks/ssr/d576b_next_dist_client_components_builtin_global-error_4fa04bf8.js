@@ -1,3 +1,0 @@
-module.exports=[23790,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(86336);a.n(d("[project]/night-shift-work/builds/20260205-second-brain/second-brain/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},45164,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(86336);a.n(d("[project]/night-shift-work/builds/20260205-second-brain/second-brain/node_modules/next/dist/client/components/builtin/global-error.js"))},20501,a=>{"use strict";a.i(23790);var b=a.i(45164);a.n(b)}];
-
-//# sourceMappingURL=d576b_next_dist_client_components_builtin_global-error_4fa04bf8.js.map

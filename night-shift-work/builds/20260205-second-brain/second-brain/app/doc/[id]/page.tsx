@@ -1,4 +1,4 @@
-import { getDocumentById, getAllDocuments } from "@/lib/documents";
+import { allDocuments } from "@/lib/data";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import Link from "next/link";
 import { ArrowLeft, FileText, Clock, Folder } from "lucide-react";
@@ -8,15 +8,14 @@ interface PageProps {
   params: { id: string };
 }
 
-export async function generateStaticParams() {
-  const docs = await getAllDocuments();
-  return docs.map((doc) => ({
+export function generateStaticParams() {
+  return allDocuments.map((doc: any) => ({
     id: doc.id,
   }));
 }
 
-export default async function DocumentPage({ params }: PageProps) {
-  const doc = await getDocumentById(params.id);
+export default function DocumentPage({ params }: PageProps) {
+  const doc = allDocuments.find((d: any) => d.id === params.id);
 
   if (!doc) {
     notFound();
@@ -45,7 +44,7 @@ export default async function DocumentPage({ params }: PageProps) {
               </span>
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                {doc.lastModified.toLocaleDateString()}
+                {new Date(doc.lastModified).toLocaleDateString()}
               </span>
               <span className="flex items-center gap-1">
                 <FileText className="w-4 h-4" />
@@ -60,7 +59,7 @@ export default async function DocumentPage({ params }: PageProps) {
           <div className="mt-4">
             <p className="text-xs text-gray-500 mb-2">Linked documents:</p>
             <div className="flex flex-wrap gap-2">
-              {doc.links.slice(0, 10).map((link, i) => (
+              {doc.links.slice(0, 10).map((link: string, i: number) => (
                 <span
                   key={i}
                   className="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400"

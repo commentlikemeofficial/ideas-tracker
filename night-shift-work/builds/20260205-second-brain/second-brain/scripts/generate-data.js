@@ -1,24 +1,15 @@
-import fs from "fs";
-import path from "path";
-import { glob } from "glob";
-
-export interface Document {
-  id: string;
-  title: string;
-  path: string;
-  content: string;
-  category: string;
-  lastModified: string;
-  links: string[];
-}
+// Script to generate static data for the 2nd Brain app
+const fs = require("fs");
+const path = require("path");
+const { glob } = require("glob");
 
 const KNOWLEDGE_PATHS = [
   "/home/ubuntu/clawd/.brv/canonical-memory",
   "/home/ubuntu/clawd/memory",
 ];
 
-export function getAllDocuments(): Document[] {
-  const documents: Document[] = [];
+function getAllDocuments() {
+  const documents = [];
 
   for (const basePath of KNOWLEDGE_PATHS) {
     try {
@@ -31,15 +22,12 @@ export function getAllDocuments(): Document[] {
           const content = fs.readFileSync(file, "utf-8");
           const stat = fs.statSync(file);
           
-          // Extract title from first h1 or filename
           const titleMatch = content.match(/^#\s+(.+)$/m);
           const title = titleMatch ? titleMatch[1] : path.basename(file, ".md");
           
-          // Extract links [[...]] or [...](...)
           const linkMatches = content.match(/\[\[([^\]]+)\]\]|\[([^\]]+)\]\(([^)]+)\)/g) || [];
           const links = linkMatches.map(m => m.replace(/[\[\]()]/g, ""));
           
-          // Determine category from path
           const relativePath = path.relative(basePath, file);
           const category = relativePath.split("/")[0] || "general";
           
@@ -64,27 +52,7 @@ export function getAllDocuments(): Document[] {
   return documents.sort((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
 }
 
-export function getDocumentById(id: string): Document | null {
-  const documents = getAllDocuments();
-  return documents.find(d => d.id === id) || null;
-}
-
-export function getDocumentsByCategory(category: string): Document[] {
-  const documents = getAllDocuments();
-  return documents.filter(d => d.category === category);
-}
-
-export function getJournalEntries(): Document[] {
-  const documents = getAllDocuments();
-  return documents
-    .filter(d => 
-      d.path.includes("memory/") && 
-      (d.title.match(/^\d{4}-\d{2}-\d{2}/) || d.path.match(/\d{4}-\d{2}-\d{2}/))
-    )
-    .sort((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
-}
-
-export function buildGraphData(documents: Document[]) {
+function buildGraphData(documents) {
   const nodes = documents.map(d => ({
     id: d.id,
     title: d.title,
@@ -92,8 +60,8 @@ export function buildGraphData(documents: Document[]) {
     radius: Math.min(30, 10 + d.content.length / 1000),
   }));
 
-  const links: { source: string; target: string }[] = [];
-  const linkSet = new Set<string>();
+  const links = [];
+  const linkSet = new Set();
 
   for (const doc of documents) {
     for (const link of doc.links) {
@@ -113,3 +81,26 @@ export function buildGraphData(documents: Document[]) {
 
   return { nodes, links };
 }
+
+// Generate data
+const allDocuments = getAllDocuments();
+const journalEntries = allDocuments.filter(d => 
+  d.path.includes("memory/") && 
+  (d.title.match(/^\d{4}-\d{2}-\d{2}/) || d.path.match(/\d{4}-\d{2}-\d{2}/))
+);
+const graphData = buildGraphData(allDocuments);
+
+// Write to JSON file
+const outputDir = path.join(__dirname, "..", "lib");
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
+}
+
+fs.writeFileSync(
+  path.join(outputDir, "data.json"),
+  JSON.stringify({ allDocuments, journalEntries, graphData }, null, 2)
+);
+
+console.log(`Generated data for ${allDocuments.length} documents`);
+console.log(`Journal entries: ${journalEntries.length}`);
+console.log(`Graph nodes: ${graphData.nodes.length}`);

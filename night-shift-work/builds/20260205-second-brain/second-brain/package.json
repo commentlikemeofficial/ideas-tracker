@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.13",
     "d3": "^7.9.0",
     "date-fns": "^4.1.0",
     "glob": "^13.0.1",
@@ -17,10 +18,12 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^16.1.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/d3": "^7.4.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

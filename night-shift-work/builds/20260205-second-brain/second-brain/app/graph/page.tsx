@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import { getAllDocuments, buildGraphData } from "@/lib/documents";
 import Link from "next/link";
+import { graphData } from "@/lib/data";
 
 interface GraphNode {
   id: string;
@@ -23,23 +23,18 @@ interface GraphLink {
 
 export default function GraphPage() {
   const svgRef = useRef<SVGSVGElement>(null);
-  const [documents, setDocuments] = useState<any[]>([]);
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadData() {
-      const docs = await getAllDocuments();
-      setDocuments(docs);
-      setLoading(false);
-    }
-    loadData();
+    // Use static data
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   useEffect(() => {
-    if (!svgRef.current || documents.length === 0) return;
+    if (!svgRef.current || loading) return;
 
-    const { nodes, links } = buildGraphData(documents);
+    const { nodes, links } = graphData as { nodes: GraphNode[], links: GraphLink[] };
     
     const width = svgRef.current.clientWidth;
     const height = svgRef.current.clientHeight || 600;
@@ -54,8 +49,8 @@ export default function GraphPage() {
       .range(["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"]);
 
     // Create simulation
-    const simulation = d3.forceSimulation<GraphNode>(nodes as GraphNode[])
-      .force("link", d3.forceLink<GraphNode, GraphLink>(links as GraphLink[]).id((d: any) => d.id).distance(100))
+    const simulation = d3.forceSimulation<GraphNode>(nodes)
+      .force("link", d3.forceLink<GraphNode, GraphLink>(links).id((d: any) => d.id).distance(100))
       .force("charge", d3.forceManyBody().strength(-300))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("collision", d3.forceCollide().radius((d: any) => d.radius + 5));
@@ -109,16 +104,16 @@ export default function GraphPage() {
 
     // Node circles
     node.append("circle")
-      .attr("r", (d: any) => d.radius)
-      .attr("fill", (d: any) => colorScale(d.category) as string)
+      .attr("r", (d: GraphNode) => d.radius)
+      .attr("fill", (d: GraphNode) => colorScale(d.category) as string)
       .attr("stroke", "#1f2937")
       .attr("stroke-width", 2)
       .attr("opacity", 0.8);
 
     // Node labels
     node.append("text")
-      .text((d: any) => d.title.length > 20 ? d.title.slice(0, 20) + "..." : d.title)
-      .attr("x", (d: any) => d.radius + 5)
+      .text((d: GraphNode) => d.title.length > 20 ? d.title.slice(0, 20) + "..." : d.title)
+      .attr("x", (d: GraphNode) => d.radius + 5)
       .attr("y", 4)
       .attr("font-size", "10px")
       .attr("fill", "#9ca3af")
@@ -127,10 +122,10 @@ export default function GraphPage() {
     // Update positions on tick
     simulation.on("tick", () => {
       link
-        .attr("x1", (d: any) => (d.source as GraphNode).x)
-        .attr("y1", (d: any) => (d.source as GraphNode).y)
-        .attr("x2", (d: any) => (d.target as GraphNode).x)
-        .attr("y2", (d: any) => (d.target as GraphNode).y);
+        .attr("x1", (d: any) => (d.source as GraphNode).x!)
+        .attr("y1", (d: any) => (d.source as GraphNode).y!)
+        .attr("x2", (d: any) => (d.target as GraphNode).x!)
+        .attr("y2", (d: any) => (d.target as GraphNode).y!);
 
       node.attr("transform", (d: any) => `translate(${d.x},${d.y})`);
     });
@@ -141,7 +136,7 @@ export default function GraphPage() {
     return () => {
       simulation.stop();
     };
-  }, [documents]);
+  }, [loading]);
 
   if (loading) {
     return (
@@ -151,6 +146,8 @@ export default function GraphPage() {
     );
   }
 
+  const { nodes } = graphData as { nodes: GraphNode[] };
+
   return (
     <div className="relative h-full">
       {/* Header */}
@@ -159,7 +156,7 @@ export default function GraphPage() {
           <div>
             <h1 className="text-2xl font-bold">Knowledge Graph</h1>
             <p className="text-sm text-gray-400">
-              {documents.length} documents • Drag to rearrange • Scroll to zoom
+              {nodes.length} documents • Drag to rearrange • Scroll to zoom
             </p>
           </div>
         </div>
@@ -192,13 +189,13 @@ export default function GraphPage() {
       <div className="absolute bottom-4 left-4 bg-gray-900 border border-gray-800 rounded-lg p-3">
         <p className="text-xs text-gray-500 mb-2">Categories</p>
         <div className="space-y-1">
-          {[...new Set(documents.map(d => d.category))].slice(0, 6).map((cat, i) => (
+          {[...new Set(nodes.map((d: GraphNode) => d.category))].slice(0, 6).map((cat, i) => (
             <div key={cat} className="flex items-center gap-2 text-xs">
               <div 
                 className="w-3 h-3 rounded-full"
                 style={{ background: ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"][i] }}
               />
-              <span className="capitalize">{cat.replace(/-/g, ' ')}</span>
+              <span className="capitalize">{String(cat).replace(/-/g, ' ')}</span>
             </div>
           ))}
         </div>

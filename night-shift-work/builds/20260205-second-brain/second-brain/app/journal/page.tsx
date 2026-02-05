@@ -1,9 +1,9 @@
-import { getJournalEntries } from "@/lib/documents";
+import { journalEntries } from "@/lib/data";
 import Link from "next/link";
 import { Calendar, FileText } from "lucide-react";
 
-export default async function JournalPage() {
-  const entries = await getJournalEntries();
+export default function JournalPage() {
+  const entries = journalEntries;
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
@@ -17,7 +17,7 @@ export default async function JournalPage() {
         <div className="absolute left-4 top-0 bottom-0 w-px bg-gray-800" />
 
         <div className="space-y-6">
-          {entries.map((entry, index) => (
+          {entries.map((entry: any, index: number) => (
             <Link
               key={entry.id}
               href={`/doc/${encodeURIComponent(entry.id)}`}
@@ -33,7 +33,7 @@ export default async function JournalPage() {
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-semibold text-lg">{entry.title}</h3>
                   <span className="text-xs text-gray-500">
-                    {entry.lastModified.toLocaleDateString('en-US', {
+                    {new Date(entry.lastModified).toLocaleDateString('en-US', {
                       weekday: 'short',
                       year: 'numeric',
                       month: 'short',
