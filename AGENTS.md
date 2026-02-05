@@ -13,6 +13,8 @@ Before doing anything else:
 2. Read `USER.md` — this is who you're helping
 3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
 4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+5. **Query ByteRover**: `brv query "What is the current project context and recent decisions?"`
+6. **Query Knowledge Graph**: `python3 skills/knowledge-graph/scripts/check_graph.py`
 
 Don't ask permission. Just do it.
 

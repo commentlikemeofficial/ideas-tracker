@@ -1,0 +1,6 @@
+timestamp,topic,category,platform,status,notes
+2026-02-05 11:45:00,"AI Is Killing B2B SaaS",content,trend_research,done,X thread + Reddit post + LinkedIn generated
+2026-02-05 11:45:00,"Claude Code for Infrastructure",content,trend_research,done,Fluid.sh pattern noted
+2026-02-05 11:45:00,"Voxtral Transcribe 2",content,trend_research,done,Mistral speech AI 1/5th cost of ElevenLabs
+2026-02-05 11:45:00,"Postgres Postmaster Bottleneck",content,trend_research,done,Connection pooling deep dive
+2026-02-05 11:45:00,"RS-SDK RuneScape AI",content,trend_research,done,AI agents in MMORPGs
