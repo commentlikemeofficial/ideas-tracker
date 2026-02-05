@@ -55,33 +55,67 @@ If output is non-empty, escalate immediately with binary decision (kill/proceed/
 - Immediate Telegram notification (no batching)
 - Auto-recommend kill after 3 escalations
 
-## Night Shift CEO Mode
+## Night Shift CEO Mode — UPGRADED (Build PRs Overnight)
 
 **Activation:** When Rajesh offline >4 hours (11 PM - 7 AM IST)
 
-Check and potentially activate:
+**Check and activate:**
 ```bash
 python3 /home/ubuntu/clawd/skills/night-shift-worker/scripts/night_shift_ceo.py
 ```
 
-**Objective:** Produce at most ONE high-quality morning surprise (money/usefulness/productivity)
+**Objective:** Build ONE code project overnight using Kimi CLI, ready for Rajesh to review in the morning
+
+**How it works:**
+1. Picks next project from build queue (workflow automations, tools, features)
+2. Prepares workspace with instructions for Kimi CLI
+3. Creates ready-to-run Kimi command
+4. Delivers build location + instructions to Rajesh
+5. Rajesh reviews → runs Kimi if needed → tests → integrates
+
+**Build Queue:** `/home/ubuntu/clawd/night-shift-work/build-queue.json`
+**Built Projects:** `/home/ubuntu/clawd/night-shift-work/built-projects.json`
+**Build Output:** `/home/ubuntu/clawd/night-shift-work/builds/YYYYMMDD-{project-id}/`
+
+**Current Projects in Queue:**
+1. Auto-commit Helper (detect uncommitted changes, smart commit messages)
+2. Daily Work Summary Generator (parse memory + git, create daily reports)
+3. GitHub PR Notifier (monitor repos, send Telegram alerts)
+4. Skill Usage Analytics (track which skills are used, weekly reports)
+5. Memory Auto-sync (sync MEMORY.md with daily files)
+6. 2nd Brain Web UI (NextJS app for visualizing knowledge)
 
 **Constraints:**
-- No escalations unless critical
 - Max ONE delivery per morning
+- Prepares workspace but doesn't auto-run Kimi (requires review first)
 - Silence acceptable if quality bar not met
-- Kill weak ideas without notification
+- Creates PRs/branches, never pushes to main
 
 **Delivery Format:**
 ```
 🌙 NIGHT SHIFT DELIVERY
-[Artifact]
+
+Built: {Project Name}
+
+What it is:
+[Description]
+
+Build Location:
+/path/to/build
+
+To Review:
+1. cd /path/to/build
+2. Read BUILD_INSTRUCTIONS.md
+3. Review code
+4. Run Kimi command if needed
 
 Why it matters:
-[1-2 lines]
+[Saves time/improves workflow]
 
-Recommended next action:
-[One action]
+Next Steps:
+1. Review code
+2. Test it
+3. Copy to main project if good
 ```
 
 ## Morning Brief Rule

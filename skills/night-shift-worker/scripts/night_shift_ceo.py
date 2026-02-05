@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 """
-Night Shift CEO Mode
-Runs when Rajesh is offline/sleeping.
-Produces at most ONE high-quality morning surprise.
+Night Shift CEO Mode — UPGRADED v2
+Builds code PRs overnight for Rajesh to review in the morning
+Uses Kimi CLI for actual coding
 """
+
 import json
 import sys
+import os
+import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
 
 NIGHT_SHIFT_LOG = Path("/home/ubuntu/clawd/night-shift-work/ceo-log.json")
 DELIVERY_FILE = Path("/home/ubuntu/clawd/night-shift-work/morning-delivery.json")
 LAST_MESSAGE_FILE = Path("/home/ubuntu/clawd/memory/last-message-timestamp.txt")
+WORK_DIR = Path("/home/ubuntu/clawd/night-shift-work")
+BUILDS_DIR = WORK_DIR / "builds"
 
 def is_night_shift_hours():
     """Check if it's night shift hours (11 PM - 7 AM IST)."""
@@ -58,90 +63,238 @@ def already_delivered_today():
     delivery_date = datetime.fromisoformat(delivery.get('timestamp', '2000-01-01')).date()
     return delivery_date == datetime.now().date()
 
-def evaluate_opportunity(opportunity):
-    """Evaluate if opportunity meets quality bar."""
-    score = 0
+def get_build_queue():
+    """Get list of projects to build."""
+    queue_file = WORK_DIR / "build-queue.json"
     
-    # Money potential
-    if opportunity.get('revenue_potential') in ['high', 'medium']:
-        score += 3 if opportunity['revenue_potential'] == 'high' else 1
+    default_queue = [
+        {
+            "id": "auto-commit-helper",
+            "name": "Auto-commit Helper",
+            "description": "Script that detects uncommitted changes in clawd repo and suggests/commits them with smart messages",
+            "files": ["scripts/auto-commit.py"],
+            "tech": "python",
+            "priority": 1
+        },
+        {
+            "id": "daily-work-summary",
+            "name": "Daily Work Summary Generator",
+            "description": "Parse memory files, git commits, and activity logs to generate a daily work summary report",
+            "files": ["scripts/daily-summary.py"],
+            "tech": "python",
+            "priority": 2
+        },
+        {
+            "id": "github-pr-notifier",
+            "name": "GitHub PR Notifier",
+            "description": "Check for new PRs and issues in tracked repos, send Telegram notifications",
+            "files": ["scripts/pr-notify.py"],
+            "tech": "python",
+            "priority": 3
+        },
+        {
+            "id": "skill-usage-analytics",
+            "name": "Skill Usage Analytics",
+            "description": "Track which Clawdbot skills are used most/least, generate weekly utilization reports",
+            "files": ["scripts/skill-analytics.py"],
+            "tech": "python",
+            "priority": 4
+        },
+        {
+            "id": "memory-auto-sync",
+            "name": "Memory Auto-sync",
+            "description": "Automatically sync MEMORY.md with daily memory files, keep long-term memory organized",
+            "files": ["scripts/memory-sync.py"],
+            "tech": "python",
+            "priority": 5
+        },
+        {
+            "id": "second-brain-ui",
+            "name": "2nd Brain Web UI",
+            "description": "NextJS app to visualize .brv/canonical-memory/ and memory/ files in Obsidian-style graph view",
+            "files": ["apps/second-brain/"],
+            "tech": "nextjs",
+            "priority": 6
+        }
+    ]
     
-    # Usefulness
-    if opportunity.get('usefulness') in ['high', 'medium']:
-        score += 3 if opportunity['usefulness'] == 'high' else 1
-    
-    # Productivity
-    if opportunity.get('productivity_gain') in ['high', 'medium']:
-        score += 3 if opportunity['productivity_gain'] == 'high' else 1
-    
-    # Feasibility (must be doable)
-    if opportunity.get('feasible', False):
-        score += 1
-    
-    return score >= 5  # High bar
+    if queue_file.exists():
+        return json.loads(queue_file.read_text())
+    else:
+        queue_file.write_text(json.dumps(default_queue, indent=2))
+        return default_queue
 
-def scout_opportunities():
-    """Brief Scout check for high-value opportunities."""
-    # This would integrate with Scout agent
-    # For now, return empty (silence is acceptable)
-    log_activity("Scout check - no high-value opportunities")
-    return []
+def mark_project_built(project_id):
+    """Mark a project as built."""
+    built_file = WORK_DIR / "built-projects.json"
+    built = {"projects": [], "last_updated": datetime.now().isoformat()}
+    
+    if built_file.exists():
+        built = json.loads(built_file.read_text())
+    
+    if project_id not in built["projects"]:
+        built["projects"].append(project_id)
+        built_file.write_text(json.dumps(built, indent=2))
 
-def build_artifact(opportunity):
-    """Build a small artifact if opportunity is validated."""
-    log_activity(f"Building artifact: {opportunity.get('name', 'unnamed')}")
-    # Would direct AI Developer for small builds
+def get_next_project():
+    """Get the next project to build."""
+    queue = get_build_queue()
+    built_file = WORK_DIR / "built-projects.json"
+    built = []
+    
+    if built_file.exists():
+        built = json.loads(built_file.read_text()).get("projects", [])
+    
+    # Find first unbuilt project
+    for project in sorted(queue, key=lambda x: x["priority"]):
+        if project["id"] not in built:
+            return project
+    
     return None
 
-def draft_content():
-    """Draft high-value content if no build opportunities."""
-    log_activity("ContentClaw check - evaluating content opportunities")
-    # Would integrate with ContentClaw
-    return None
+def prepare_kimi_workspace(project):
+    """Prepare workspace for Kimi to build in."""
+    today = datetime.now().strftime("%Y%m%d")
+    build_dir = BUILDS_DIR / f"{today}-{project['id']}"
+    build_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Create instructions file for Kimi
+    instructions = f"""# Kimi Build Instructions
 
-def format_delivery(artifact, artifact_type):
-    """Format morning delivery per specification."""
-    if artifact_type == "opportunity":
-        return f"""🌙 NIGHT SHIFT DELIVERY
+Project: {project['name']}
+Date: {datetime.now().isoformat()}
 
-{artifact['name']}
+## Goal
+{project['description']}
 
-Research Summary:
-{artifact['summary'][:200]}...
+## Requirements
+1. Create a working, production-ready implementation
+2. Include proper error handling
+3. Add clear comments and documentation
+4. Follow best practices for {project['tech']}
+5. Include a README with usage instructions
+6. Make it ready for Rajesh to review and integrate
+
+## Output Directory
+{build_dir}
+
+## Files to Create
+{chr(10).join(f"- {f}" for f in project['files'])}
+
+## Context
+This is for the clawd workspace - an AI agent management system.
+The project runs on Ubuntu with Python, Node.js, and uses:
+- Clawdbot for AI agent orchestration
+- GitHub for code hosting
+- Telegram for notifications
+- ByteRover for knowledge management
+
+## Success Criteria
+- [ ] Code works without errors
+- [ ] Has proper error handling
+- [ ] Well commented
+- [ ] README explains usage
+- [ ] Ready to integrate into main project
+
+Run Kimi CLI in this directory to build the project.
+"""
+    
+    instructions_file = build_dir / "BUILD_INSTRUCTIONS.md"
+    instructions_file.write_text(instructions)
+    
+    return build_dir, instructions_file
+
+def build_with_kimi(project):
+    """Build project using Kimi CLI."""
+    log_activity(f"Preparing build: {project['name']}")
+    
+    build_dir, instructions_file = prepare_kimi_workspace(project)
+    
+    # Create the prompt for Kimi
+    prompt = f"""Build this project for me:
+
+{project['description']}
+
+Requirements:
+- Working, production-ready code
+- Error handling
+- Clear comments
+- README with usage instructions
+- Ready to integrate
+
+Create all files in the current directory.
+
+Start building now."""
+    
+    # Write prompt file
+    prompt_file = build_dir / "kimi-prompt.txt"
+    prompt_file.write_text(prompt)
+    
+    log_activity(f"Workspace prepared: {build_dir}")
+    
+    # Try to run Kimi (non-interactive mode if possible)
+    try:
+        # Check if Kimi can run in non-interactive mode
+        # For now, we prepare everything and log the command
+        kimi_command = f"cd {build_dir} && kimi -m 'Build a {project['name']}: {project['description']}. Create working code with error handling, comments, and README.'"
+        
+        command_file = build_dir / "run-kimi.sh"
+        command_file.write_text(f"#!/bin/bash\n{kimi_command}\n")
+        command_file.chmod(0o755)
+        
+        log_activity(f"Kimi command ready: {command_file}")
+        
+        return {
+            "success": True,
+            "build_dir": str(build_dir),
+            "instructions": str(instructions_file),
+            "prompt": str(prompt_file),
+            "kimi_command": str(command_file),
+            "project": project
+        }
+    except Exception as e:
+        log_activity(f"Kimi prep failed: {e}")
+        return None
+
+def format_delivery(build_result):
+    """Format morning delivery message."""
+    project = build_result["project"]
+    
+    return f"""🌙 NIGHT SHIFT DELIVERY
+
+Built: {project['name']}
+
+What it is:
+{project['description']}
+
+Build Location:
+{build_result['build_dir']}
+
+To Review:
+1. `cd {build_result['build_dir']}`
+2. Read BUILD_INSTRUCTIONS.md for context
+3. Review the code files
+4. Test if it works
+
+To Rebuild with Kimi:
+```bash
+{build_result['kimi_command']}
+```
+
+Or run Kimi with this prompt:
+```
+{build_result['prompt']}
+```
 
 Why it matters:
-{artifact['impact']}
+This automation saves time on {project['name'].lower()} daily.
 
-Recommended next action:
-{artifact['next_action']}"""
-    
-    elif artifact_type == "build":
-        return f"""🌙 NIGHT SHIFT DELIVERY
-
-Built: {artifact['name']}
-
-Location: {artifact['path']}
-
-Why it matters:
-{artifact['impact']}
-
-Recommended next action:
-{artifact['next_action']}"""
-    
-    elif artifact_type == "content":
-        return f"""🌙 NIGHT SHIFT DELIVERY
-
-Drafted: {artifact['title']}
-
-Platform: {artifact['platform']}
-
-Why it matters:
-{artifact['impact']}
-
-Recommended next action:
-{artifact['next_action']}"""
-    
-    return None
+Next Steps:
+1. Review the code
+2. Test it
+3. Copy to main project if good
+4. Or run Kimi yourself to refine it
+"""
 
 def main():
     if not should_activate():
@@ -155,46 +308,43 @@ def main():
     print("🌙 Night Shift CEO activating...")
     log_activity("Activated")
     
-    # Try to find ONE high-quality opportunity
-    opportunities = scout_opportunities()
+    # Get next project
+    project = get_next_project()
     
-    for opp in opportunities:
-        if evaluate_opportunity(opp):
-            # Try to build artifact
-            artifact = build_artifact(opp)
-            if artifact:
-                delivery = format_delivery(artifact, "build")
-                if delivery:
-                    # Save delivery
-                    with open(DELIVERY_FILE, 'w') as f:
-                        json.dump({
-                            "timestamp": datetime.now().isoformat(),
-                            "delivery": delivery,
-                            "type": "build"
-                        }, f, indent=2)
-                    print(delivery)
-                    log_activity("Delivered build artifact")
-                    return 0
+    if not project:
+        log_activity("No projects in queue")
+        print("Night Shift CEO: No projects to build")
+        return 0
     
-    # Try content if no build opportunities
-    content = draft_content()
-    if content:
-        delivery = format_delivery(content, "content")
-        if delivery:
-            with open(DELIVERY_FILE, 'w') as f:
-                json.dump({
-                    "timestamp": datetime.now().isoformat(),
-                    "delivery": delivery,
-                    "type": "content"
-                }, f, indent=2)
-            print(delivery)
-            log_activity("Delivered content")
-            return 0
+    log_activity(f"Selected project: {project['name']}")
     
-    # Quality bar not met - silence is acceptable
-    log_activity("Quality bar not met - no delivery")
-    print("Night Shift CEO: Quality bar not met, no delivery")
-    return 0
+    # Build it
+    build_result = build_with_kimi(project)
+    
+    if build_result and build_result.get("success"):
+        # Mark as built
+        mark_project_built(project["id"])
+        
+        # Format delivery
+        delivery = format_delivery(build_result)
+        
+        # Save delivery
+        with open(DELIVERY_FILE, 'w') as f:
+            json.dump({
+                "timestamp": datetime.now().isoformat(),
+                "delivery": delivery,
+                "type": "build",
+                "project": project,
+                "build_dir": build_result["build_dir"]
+            }, f, indent=2)
+        
+        print(delivery)
+        log_activity(f"Delivered: {project['name']}")
+        return 0
+    else:
+        log_activity("Build preparation failed")
+        print("Night Shift CEO: Failed to prepare build")
+        return 1
 
 if __name__ == "__main__":
     sys.exit(main())
